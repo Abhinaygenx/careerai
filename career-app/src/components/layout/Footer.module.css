@@ -1,0 +1,249 @@
+.footer {
+    margin-top: auto;
+}
+
+/* CTA Section */
+.cta {
+    background: var(--gradient-cta);
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.ctaContent {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ctaTitle {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.ctaSubtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 32px;
+}
+
+.ctaActions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ctaButton {
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+    background: white;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ctaSecondary {
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: transparent;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+}
+
+.ctaSecondary:hover {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Footer */
+.main {
+    background: var(--surface);
+    padding: 64px 24px;
+    border-top: 1px solid var(--border-light);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 48px;
+}
+
+/* Brand */
+.brand {
+    max-width: 300px;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.logoIcon {
+    font-size: 28px;
+}
+
+.logoText {
+    color: var(--text-primary);
+}
+
+.logoAi {
+    color: var(--primary);
+}
+
+.brandDesc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.social {
+    display: flex;
+    gap: 12px;
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--surface-secondary);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.socialLink:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Columns */
+.column {
+    min-width: 0;
+}
+
+.columnTitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.columnLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.columnLinks li {
+    margin-bottom: 12px;
+}
+
+.columnLinks a {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.columnLinks a:hover {
+    color: var(--primary);
+}
+
+/* Bottom Bar */
+.bottom {
+    background: var(--surface-secondary);
+    padding: 24px;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .brand {
+        grid-column: span 3;
+        max-width: none;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .brandDesc {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .social {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .cta {
+        padding: 60px 20px;
+    }
+
+    .ctaTitle {
+        font-size: 28px;
+    }
+
+    .ctaSubtitle {
+        font-size: 16px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .brand {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .brand {
+        grid-column: 1;
+    }
+
+    .ctaActions {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,10 @@
+streamlit
+spacy
+sentence-transformers
+pymupdf
+qdrant-client
+nltk
+scikit-learn
+numpy
+pandas
+flask

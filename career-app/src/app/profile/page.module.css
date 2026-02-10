@@ -1,0 +1,167 @@
+.profilePage {
+    min-height: 100vh;
+    background-color: #FAFAFA;
+    font-family: var(--font-inter);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.backLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6B7280;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+}
+
+.backLink:hover {
+    color: #111827;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.main {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1rem;
+    color: #6B7280;
+}
+
+.spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #E5E7EB;
+    border-top-color: #2563EB;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.profileCard {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.avatarSection {
+    margin-bottom: 2rem;
+}
+
+.avatarLarge {
+    width: 6rem;
+    height: 6rem;
+    background-color: #EFF6FF;
+    color: #2563EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 auto 1.5rem;
+}
+
+.userName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display);
+}
+
+.userEmail {
+    color: #6B7280;
+    font-size: 1rem;
+}
+
+.infoSection {
+    text-align: left;
+    border-top: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.infoGroup label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6B7280;
+    margin-bottom: 0.25rem;
+}
+
+.infoValue {
+    font-size: 1rem;
+    color: #111827;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upgradeLink {
+    font-size: 0.875rem;
+    color: #2563EB;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.upgradeLink:hover {
+    text-decoration: underline;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.logoutBtn {
+    background-color: #FEE2E2;
+    color: #DC2626;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    font-family: inherit;
+}
+
+.logoutBtn:hover {
+    background-color: #FECACA;
+}

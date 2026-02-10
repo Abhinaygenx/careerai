@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8501 5000
 
-CMD ["sh", "-c", "streamlit run app.py --server.port 8501 & python api.py"]
+CMD ["python", "api.py"]

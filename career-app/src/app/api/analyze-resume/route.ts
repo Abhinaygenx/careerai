@@ -36,7 +36,8 @@ export async function POST(req: NextRequest) {
 
         // Forward the request to the Python Service
         try {
-            const pythonServiceUrl = 'http://127.0.0.1:5000/score';
+            // Use environment variable for production, fallback to localhost for dev
+            const pythonServiceUrl = process.env.ATS_API_URL || 'http://127.0.0.1:5000/score';
 
             const response = await fetch(pythonServiceUrl, {
                 method: 'POST',

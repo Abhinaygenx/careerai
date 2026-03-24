@@ -78,14 +78,13 @@
 
 /* Form Section - Adapts to Theme */
 .formSection {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr;
     padding: 40px;
     background: var(--background);
-    align-items: center;
-    justify-content: center;
     position: relative;
     z-index: 2;
+    min-height: 100vh; /* Ensure it takes full height for centering */
 }
 
 /* Logo - Prominent */
@@ -94,13 +93,11 @@
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 800;
     color: var(--text-primary);
-    margin-bottom: 60px;
-    position: absolute;
-    top: 60px;
-    left: 60px;
+    justify-self: start;
+    align-self: start;
     transition: transform 0.2s ease;
 }
 
@@ -120,6 +117,8 @@
 .formContainer {
     max-width: 480px;
     width: 100%;
+    align-self: center;
+    justify-self: center;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 24px;
@@ -518,16 +517,18 @@
 
     .formSection {
         padding: 40px 24px;
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         background: var(--background);
+        min-height: 100vh;
     }
 
     .logo {
         position: relative;
-        top: 0;
-        left: 0;
-        margin-bottom: 24px; /* Reduced margin for mobile */
-        font-size: 28px;
+        align-self: center;
+        margin-bottom: 24px;
+        font-size: 24px;
     }
 
     .formContainer {

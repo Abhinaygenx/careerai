@@ -137,9 +137,9 @@ export default function SignupPage() {
                                     />
                                     <span>
                                         I agree to the{' '}
-                                        <Link href="/terms" style={{ color: 'var(--primary)' }}>Terms of Service</Link>
+                                        <Link href="/terms" style={{ color: 'var(--accent)' }}>Terms of Service</Link>
                                         {' '}and{' '}
-                                        <Link href="/privacy" style={{ color: 'var(--primary)' }}>Privacy Policy</Link>
+                                        <Link href="/privacy" style={{ color: 'var(--accent)' }}>Privacy Policy</Link>
                                     </span>
                                 </label>
                             </div>

@@ -394,7 +394,7 @@
     padding: 14px;
     font-size: 14px;
     font-weight: 500;
-    color: var(--primary);
+    color: var(--text-primary);
     background: var(--background-secondary);
     text-align: center;
     text-decoration: none;

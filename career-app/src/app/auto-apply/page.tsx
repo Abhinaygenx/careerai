@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import styles from './page.module.css';
@@ -14,9 +14,11 @@ interface Job {
     deadline: string;
     daysLeft: number;
     matchScore: number;
-    status: 'pending' | 'applied' | 'interview' | 'rejected';
+    status: 'pending' | 'applied' | 'interview' | 'rejected' | 'tailoring';
     source: string;
     skills: string[];
+    description?: string;
+    url?: string;
 }
 
 const mockJobs: Job[] = [
@@ -88,11 +90,37 @@ const mockJobs: Job[] = [
 ];
 
 export default function AutoApplyPage() {
-    const [jobs, setJobs] = useState<Job[]>(mockJobs);
+    const [jobs, setJobs] = useState<Job[]>([]);
     const [filter, setFilter] = useState<'all' | 'pending' | 'applied' | 'interview'>('all');
     const [selectedJobs, setSelectedJobs] = useState<string[]>([]);
     const [isApplying, setIsApplying] = useState(false);
+    const [isLoadingJobs, setIsLoadingJobs] = useState(true);
     const [credits, setCredits] = useState(45);
+
+    useEffect(() => {
+        // Fetch jobs from python backend
+        const fetchJobs = async () => {
+            try {
+                const res = await fetch('http://localhost:5000/api/discover?search_term=Software Engineer&location=India');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.jobs && data.jobs.length > 0) {
+                        setJobs(data.jobs);
+                    } else {
+                        setJobs(mockJobs); // fallback
+                    }
+                } else {
+                    setJobs(mockJobs);
+                }
+            } catch (error) {
+                console.error("Failed to fetch jobs:", error);
+                setJobs(mockJobs);
+            } finally {
+                setIsLoadingJobs(false);
+            }
+        };
+        fetchJobs();
+    }, []);
 
     const filteredJobs = jobs.filter(job => {
         if (filter === 'all') return true;
@@ -121,13 +149,47 @@ export default function AutoApplyPage() {
 
         setIsApplying(true);
 
-        // Simulate application process
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Mark as tailoring first
+        setJobs(prev => prev.map(job =>
+            selectedJobs.includes(job.id) ? { ...job, status: 'tailoring' as Job['status'] } : job
+        ));
+
+        for (const jobId of selectedJobs) {
+            const job = jobs.find(j => j.id === jobId);
+            if (job) {
+                try {
+                    // Enrich JD first to get full description
+                    let jdText = job.description || '';
+                    if (job.url && jdText.length < 100) {
+                        const enrichRes = await fetch('http://localhost:5000/api/enrich', {
+                            method: 'POST', headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ url: job.url })
+                        });
+                        if (enrichRes.ok) {
+                            const data = await enrichRes.json();
+                            jdText = data.description;
+                        }
+                    }
+
+                    // Call Tailor
+                    await fetch('http://localhost:5000/api/tailor', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ resume_text: "Software Engineer with React experience.", jd_text: jdText })
+                    });
+                    
+                    // Call Cover Letter
+                    await fetch('http://localhost:5000/api/cover-letter', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ resume_text: "Software Engineer with React experience.", jd_text: jdText })
+                    });
+                } catch (e) {
+                    console.error("Apply flow error", e);
+                }
+            }
+        }
 
         setJobs(prev => prev.map(job =>
-            selectedJobs.includes(job.id)
-                ? { ...job, status: 'applied' as const }
-                : job
+            selectedJobs.includes(job.id) ? { ...job, status: 'applied' as const } : job
         ));
 
         setCredits(prev => prev - selectedJobs.length);
@@ -138,6 +200,7 @@ export default function AutoApplyPage() {
     const getStatusBadge = (status: Job['status']) => {
         const badges = {
             pending: { label: 'Pending', className: styles.pending },
+            tailoring: { label: 'Tailoring AI', className: styles.interview },
             applied: { label: 'Applied', className: styles.applied },
             interview: { label: 'Interview', className: styles.interview },
             rejected: { label: 'Rejected', className: styles.rejected }
@@ -244,6 +307,12 @@ export default function AutoApplyPage() {
                     </div>
 
                     {/* Job List */}
+                    {isLoadingJobs ? (
+                        <div className={styles.loadingState}>
+                            <span className={styles.spinnerLarge}></span>
+                            <p>Discovering jobs for your profile...</p>
+                        </div>
+                    ) : (
                     <div className={styles.jobList}>
                         {filteredJobs.map((job) => {
                             const statusBadge = getStatusBadge(job.status);
@@ -320,6 +389,7 @@ export default function AutoApplyPage() {
                             );
                         })}
                     </div>
+                    )}
 
                     {filteredJobs.length === 0 && (
                         <div className={styles.emptyState}>

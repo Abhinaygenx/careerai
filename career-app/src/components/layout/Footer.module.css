@@ -109,7 +109,7 @@
 }
 
 .logoAi {
-    color: var(--primary);
+    color: var(--text-secondary);
 }
 
 .brandDesc {
@@ -137,8 +137,8 @@
 }
 
 .socialLink:hover {
-    background: var(--primary);
-    color: white;
+    background: var(--accent);
+    color: #0F0F0F; /* Ensure the icon is dark on the bright green background */
 }
 
 /* Columns */
@@ -173,7 +173,7 @@
 }
 
 .columnLinks a:hover {
-    color: var(--primary);
+    color: var(--accent);
 }
 
 /* Bottom Bar */

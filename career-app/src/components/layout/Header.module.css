@@ -2,9 +2,22 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    
+    /* Force header to ALWAYS be light mode to "pop" out, 
+       even when body is in dark mode (as per design screenshot) */
     background: rgba(255, 255, 255, 0.98);
+    --surface: #FFFFFF;
+    --surface-hover: #FAFAFA;
+    --surface-secondary: #F8F9FA;
+    --background-secondary: #F8F9FA;
+    --text-primary: #0F0F0F;
+    --text-secondary: #6B7280;
+    --border-light: #F3F4F6;
+    --border: #E5E7EB;
+
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary); /* Ensure text color uses the forced light mode variable */
 }
 
 .container {
@@ -150,6 +163,24 @@
     gap: 16px;
 }
 
+.themeToggle {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.themeToggle:hover {
+    background: var(--background-secondary);
+    transform: scale(1.1);
+}
+
 .signIn {
     padding: 10px 18px;
     font-size: 14px;
@@ -241,7 +272,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--surface);
+    
+    /* Force mobile menu to also be light mode */
+    background: #FFFFFF;
+    --surface: #FFFFFF;
+    --background-secondary: #F8F9FA;
+    --text-primary: #0F0F0F;
+    --border: #E5E7EB;
+
     padding: 24px;
     opacity: 0;
     visibility: hidden;

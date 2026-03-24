@@ -3,12 +3,15 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import styles from './Header.module.css';
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { user, logout } = useAuth();
+    const { isDark, toggleTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
+
 
     useEffect(() => {
         setMounted(true);
@@ -87,6 +90,18 @@ export default function Header() {
                 </nav>
 
                 <div className={styles.actions}>
+                    {/* Theme Toggle */}
+                    {mounted && (
+                        <button
+                            onClick={toggleTheme}
+                            className={styles.themeToggle}
+                            aria-label="Toggle theme"
+                            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                        >
+                            {isDark ? '☀️' : '🌙'}
+                        </button>
+                    )}
+
                     {showAuth ? (
                         <div className={styles.userMenu}>
                             <button className={styles.userButton}>
@@ -139,6 +154,15 @@ export default function Header() {
                     <Link href="/colleges" className={styles.mobileNavLink}>My Colleges</Link>
                     <Link href="/resources" className={styles.mobileNavLink}>Resources</Link>
                     <div className={styles.mobileActions}>
+                        {mounted && (
+                            <button
+                                onClick={toggleTheme}
+                                className={styles.mobileSignIn}
+                                style={{ background: 'var(--background-secondary)', border: 'none', marginBottom: '8px' }}
+                            >
+                                {isDark ? '☀️ Switch to Light Mode' : '🌙 Switch to Dark Mode'}
+                            </button>
+                        )}
                         {showAuth ? (
                             <>
                                 <Link href="/dashboard" className={styles.mobileSignIn}>Dashboard</Link>

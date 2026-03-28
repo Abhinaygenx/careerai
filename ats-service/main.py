@@ -16,7 +16,11 @@ from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
 # Pre-load the embedding model at startup (avoids cold-start on first request)
-from embeddings import get_model  # noqa: E402
+try:
+    from embeddings import get_model
+except Exception as e:
+    print("Embedding import failed:", e)
+    get_model = None# noqa: E402
 from llm_feedback import generate_feedback  # noqa: E402
 from parser import extract_text  # noqa: E402
 from scorer import score_resume  # noqa: E402
@@ -24,9 +28,7 @@ from scorer import score_resume  # noqa: E402
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("[startup] Pre-loading embedding model...")
-    get_model()  # Downloads & caches on first run
-    print("[startup] ATS service ready.")
+    print("[startup] ATS service starting (no preload)...")
     yield
 
 

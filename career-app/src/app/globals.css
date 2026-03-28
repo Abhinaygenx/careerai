@@ -37,9 +37,10 @@
 
   /* Text Colors */
   --text-primary: #0F0F0F;
-  --text-secondary: #6B7280;
-  --text-muted: #9CA3AF;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
   --text-inverse: #FFFFFF;
+  --text-accent: #55750C; /* High contrast green for light mode text */
 
   /* Borders */
   --border: #E5E7EB;
@@ -88,6 +89,7 @@
   --text-secondary: #9CA3AF;
   --text-muted: #6B7280;
   --text-inverse: #0F0F0F;
+  --text-accent: #C4F82A; /* Bright green for dark mode text */
 
   /* Borders */
   --border: #2D2D2D;

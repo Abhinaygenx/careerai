@@ -6,4 +6,3 @@ requests
 numpy
 python-dotenv
 sentence-transformers
-sentence-transformers

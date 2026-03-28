@@ -18,18 +18,24 @@ load_dotenv()
 # Pre-load the embedding model at startup (avoids cold-start on first request)
 try:
     from embeddings import get_model
-except Exception as e:
-    print("Embedding import failed:", e)
-    get_model = None# noqa: E402
-from llm_feedback import generate_feedback  # noqa: E402
-from parser import extract_text  # noqa: E402
-from scorer import score_resume  # noqa: E402
+except:
+    get_model = None
 
+try:
+    from llm_feedback import generate_feedback
+except:
+    generate_feedback = None
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    print("[startup] ATS service starting (no preload)...")
-    yield
+try:
+    from parser import extract_text
+except:
+    extract_text = None
+
+try:
+    from scorer import score_resume
+except:
+    score_resume = None
+
 
 
 # ---------------------------------------------------------------------------
@@ -37,11 +43,9 @@ async def lifespan(app: FastAPI):
 # ---------------------------------------------------------------------------
 app = FastAPI(
     title="Antigravity ATS Engine",
-    description="High-precision ATS resume scorer powered by BGE embeddings + Llama-3",
+    description="High-precision ATS resume scorer",
     version="1.0.0",
-    lifespan=lifespan,
 )
-
 # Allow the Next.js frontend to call this service
 app.add_middleware(
     CORSMiddleware,
@@ -70,7 +74,9 @@ async def health():
         "vectordb": "chromadb",
     }
 
-
+@app.get("/")
+def home():
+    return {"status": "backend running 🚀"}
 @app.post("/analyze")
 async def analyze_resume(
     resume: UploadFile = File(..., description="PDF resume file"),

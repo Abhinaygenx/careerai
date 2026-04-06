@@ -861,7 +861,10 @@ const T = {
   l1: "#10b981", l2: "var(--blue)", l3: "var(--purple)", l4: "var(--accent)", l5: "#f59e0b",
 };
 
-const sc  = s => s >= 80 ? T.green : s >= 58 ? T.amber : T.red;
+// Score color using site design
+const scoreColor = (s) => s >= 80 ? "#10b981" : s >= 58 ? "#f59e0b" : "#ef4444";
+
+const sc  = (s) => scoreColor(s);
 const pct = (s, m) => Math.round(s / m * 100);
 const card = (extra = {}) => ({ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 14, padding: "18px 20px", ...extra });
 const stStyle = st => ({
@@ -921,19 +924,49 @@ export default function ATSv6() {
     s.textContent = `
       @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
       *, *::before, *::after { box-sizing: border-box; }
-      body { margin: 0; background: #050b18; }
       @keyframes spin   { to { transform: rotate(360deg); } }
       @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
       @keyframes pulse  { 0%,100% { opacity:.35; } 50% { opacity:1; } }
       @keyframes scan   { 0%,100% { top:-2px; } 80% { top:100%; opacity:.7; } }
-      @keyframes glow   { 0%,100% { box-shadow: 0 0 0px rgba(0,212,255,0); } 50% { box-shadow: 0 0 18px rgba(0,212,255,.3); } }
+      @keyframes glow   { 0%,100% { box-shadow: 0 0 0px var(--accent-glow); } 50% { box-shadow: 0 0 18px var(--accent-glow); } }
       .fade-up { animation: fadeUp .35s ease both; }
-      .tab-btn:hover { color: #e2e8f0 !important; background: rgba(255,255,255,.04) !important; }
+      .tab-btn:hover { color: var(--text-primary) !important; background: var(--background-secondary) !important; }
       .chip:hover { opacity: .72 !important; transform: translateY(-1px); }
-      .hint-row:hover { background: rgba(0,212,255,.06) !important; border-color: rgba(0,212,255,.28) !important; }
+      .hint-row:hover { background: var(--accent-glow) !important; border-color: var(--border-hover) !important; }
       ::-webkit-scrollbar { width: 4px; height: 4px; }
-      ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
-      input, textarea { caret-color: #00d4ff; }
+      ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+      input, textarea { caret-color: var(--accent); }
+
+      /* ── ATS PAGE MOBILE RESPONSIVE ── */
+      .ats-layer-grid  { display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+      .ats-industry-grid { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+      .ats-cover-grid  { display: grid; grid-template-columns: 1fr 280px; gap: 20px; }
+      .ats-editor-grid { display: grid; grid-template-columns: 1fr 260px; gap: 14px; }
+      .ats-kw-grid     { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+      .ats-li-grid     { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .ats-layer-cards { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-bottom: 32px; }
+      .ats-platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+      .ats-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+      .ats-tabs::-webkit-scrollbar { display: none; }
+      .ats-tab-label { white-space: nowrap; }
+
+      @media (max-width: 900px) {
+        .ats-layer-grid  { grid-template-columns: 1fr; }
+        .ats-industry-grid { grid-template-columns: 1fr; }
+        .ats-cover-grid  { grid-template-columns: 1fr; }
+        .ats-editor-grid { grid-template-columns: 1fr; }
+        .ats-kw-grid     { grid-template-columns: 1fr; gap: 20px; }
+        .ats-li-grid     { grid-template-columns: 1fr; }
+        .ats-layer-cards { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .ats-layer-cards { grid-template-columns: 1fr 1fr; }
+        .ats-tab-label { display: none; }
+        .ats-platforms-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 480px) {
+        .ats-layer-cards { grid-template-columns: 1fr; }
+      }
     `;
     document.head.appendChild(s);
     const loadScript = (src, cb) => {
@@ -1015,10 +1048,10 @@ export default function ATSv6() {
   };
   /* ───────────────────────────── UPLOAD ───────────────────────────── */
   if (stage === "upload") return (
-    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, fontFamily:"var(--font-display)" }}>
+    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, fontFamily:"var(--font-body)" }}>
       <Header />
 
-      <div style={{ maxWidth:900, margin:"0 auto", padding:"52px 22px 72px" }}>
+      <div style={{ maxWidth:900, margin:"0 auto", padding:"52px 16px 72px" }}>
         <div style={{ textAlign:"center", marginBottom:48 }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"5px 16px", borderRadius:20, background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:"var(--text-primary)", fontSize:11, fontFamily:"'JetBrains Mono',monospace", marginBottom:20, letterSpacing:.7 }}>
             <span style={{ width:6, height:6, borderRadius:"50%", background:T.accent, animation:"pulse 2s infinite" }}/>
@@ -1036,7 +1069,7 @@ export default function ATSv6() {
         </div>
 
         {/* Layer overview cards */}
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:8, marginBottom:32 }}>
+        <div className="ats-layer-cards">
           {[
             { l:"L1", name:"Structure", pts:"30pts", col:T.l1, items:["XML table detection","Section presence","Date coverage","Education completeness","Contact fields"] },
             { l:"L2", name:"Content",   pts:"25pts", col:T.l2, items:["Action verb density","Passive voice penalty","Quantification","Bullet structure","Resume length"] },
@@ -1138,52 +1171,52 @@ export default function ATSv6() {
   if (!rp) return null;
 
   return (
-    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, fontFamily:"var(--font-display)", paddingBottom:60 }}>
+    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, fontFamily:"var(--font-body)", paddingBottom:60 }}>
       <Header />
-      {/* Heavy Header */}
-      <header style={{ background:"var(--surface)", borderBottom:`1px solid ${T.border}`, padding:"32px 0 0", position:"relative", zIndex:90 }}>
-        <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 24px" }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20, flexWrap:"wrap", gap:16 }}>
-            <div>
-              <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:6 }}>
-                <div style={{ padding:"4px 10px", borderRadius:20, background:"rgba(255,255,255,.05)", border:`1px solid ${T.border}`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:T.muted }}>{rp.filename}</div>
-                <div style={{ padding:"4px 10px", borderRadius:20, background:T.l3+"15", border:`1px solid ${T.l3}35`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:T.l3 }}>{rp.industry}</div>
-                {delta && <div style={{ padding:"4px 10px", borderRadius:20, background:delta.overall>0?T.greenDim:T.redDim, border:`1px solid ${delta.overall>0?T.greenBorder:T.redBorder}`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:delta.overall>0?T.green:T.red }}>{delta.overall>0?"+":""}{delta.overall} pts since last scan</div>}
+      {/* Results Header */}
+      <header style={{ background:"var(--surface)", borderBottom:`1px solid ${T.border}`, padding:"24px 0 0", position:"relative", zIndex:90 }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 16px" }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16, flexWrap:"wrap", gap:12 }}>
+            <div style={{ minWidth:0 }}>
+              <div style={{ display:"flex", alignItems:"center", flexWrap:"wrap", gap:6, marginBottom:6 }}>
+                <div style={{ padding:"4px 10px", borderRadius:20, background:T.surface, border:`1px solid ${T.border}`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:T.muted, overflow:"hidden", textOverflow:"ellipsis", maxWidth:180, whiteSpace:"nowrap" }}>{rp.filename}</div>
+                <div style={{ padding:"4px 10px", borderRadius:20, background:"var(--accent-glow)", border:`1px solid var(--border)`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:"var(--text-accent)" }}>{rp.industry}</div>
+                {delta && <div style={{ padding:"4px 10px", borderRadius:20, background:delta.overall>0?T.greenDim:T.redDim, border:`1px solid ${delta.overall>0?T.greenBorder:T.redBorder}`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:delta.overall>0?T.green:T.red }}>{delta.overall>0?"+":""}{delta.overall} pts</div>}
               </div>
-              <h1 style={{ margin:0, fontSize:28, fontWeight:700 }}>ATS Analysis Report</h1>
+              <h1 style={{ margin:0, fontSize:"clamp(18px,4vw,26px)", fontWeight:700, color:T.text }}>ATS Analysis Report</h1>
             </div>
-            <div style={{ display:"flex", alignItems:"center", gap:20 }}>
+            <div style={{ display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
               <div style={{ textAlign:"right" }}>
-                <div style={{ fontSize:11, color:T.muted, textTransform:"uppercase", letterSpacing:1, marginBottom:2 }}>Overall Score</div>
-                <div style={{ fontSize:32, fontWeight:800, color:sc(rp.overallScore), lineHeight:1, display:"flex", alignItems:"baseline", gap:2 }}>
-                  {rp.overallScore}<span style={{ fontSize:15, color:T.muted, fontWeight:600 }}>/100</span>
+                <div style={{ fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:1, marginBottom:2 }}>Score</div>
+                <div style={{ fontSize:"clamp(22px,4vw,32px)", fontWeight:800, color:sc(rp.overallScore), lineHeight:1, display:"flex", alignItems:"baseline", gap:2 }}>
+                  {rp.overallScore}<span style={{ fontSize:13, color:T.muted, fontWeight:600 }}>/100</span>
                 </div>
               </div>
-              <div style={{ width:54, height:54, borderRadius:16, background:sc(rp.overallScore)+"15", border:`2px solid ${sc(rp.overallScore)}40`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:26, fontWeight:800, color:sc(rp.overallScore) }}>
+              <div style={{ width:50, height:50, borderRadius:14, background:sc(rp.overallScore)+"20", border:`2px solid ${sc(rp.overallScore)}50`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:22, fontWeight:800, color:sc(rp.overallScore) }}>
                 {rp.grade}
               </div>
-              <button onClick={() => setStage("upload")} style={{ padding:"10px 16px", borderRadius:10, border:`1px solid ${T.border}`, background:"rgba(255,255,255,.04)", color:T.text, cursor:"pointer", fontWeight:600, fontSize:12, marginLeft:10 }}>New Scan</button>
+              <button onClick={() => setStage("upload")} style={{ padding:"8px 14px", borderRadius:8, border:`1px solid ${T.border}`, background:T.surface, color:T.text, cursor:"pointer", fontWeight:600, fontSize:12 }}>New Scan</button>
             </div>
           </div>
           {/* Main Nav Tabs */}
-          <div style={{ display:"flex", gap:2 }}>
+          <div className="ats-tabs">
             {[
               { id:"score", label:"5-Layer Score", icon:"🎯" },
               { id:"industry", label:"Keywords & JD", icon:"📊" },
               { id:"platforms", label:"ATS Matrix", icon:"🖥️" },
-              { id:"cover", label:"Smart Cover Letter", icon:"✉️" },
-              { id:"linkedin", label:"LinkedIn Optimizer", icon:"🔵" },
-              { id:"editor", label:"Live Editor", icon:"✏️" },
+              { id:"cover", label:"Cover Letter", icon:"✉️" },
+              { id:"linkedin", label:"LinkedIn", icon:"🔵" },
+              { id:"editor", label:"Editor", icon:"✏️" },
             ].map(t => (
-              <div key={t.id} className="tab-btn" onClick={() => setTab(t.id)} style={{ padding:"14px 20px", cursor:"pointer", borderBottom:`3px solid ${tab===t.id?T.accent:"transparent"}`, color:tab===t.id?T.text:T.muted, fontWeight:tab===t.id?600:500, fontSize:13, transition:"all .2s", display:"flex", alignItems:"center", gap:6 }}>
-                <span>{t.icon}</span> {t.label}
+              <div key={t.id} className="tab-btn" onClick={() => setTab(t.id)} style={{ padding:"12px 16px", cursor:"pointer", borderBottom:`3px solid ${tab===t.id?"var(--accent)":"transparent"}`, color:tab===t.id?T.text:T.muted, fontWeight:tab===t.id?600:500, fontSize:13, transition:"all .2s", display:"flex", alignItems:"center", gap:5, flexShrink:0 }}>
+                <span>{t.icon}</span><span className="ats-tab-label">{t.label}</span>
               </div>
             ))}
           </div>
         </div>
       </header>
 
-      <div style={{ maxWidth:1200, margin:"32px auto 0", padding:"0 24px" }}>
+      <div style={{ maxWidth:1200, margin:"24px auto 0", padding:"0 16px" }}>
         
         {/* ── SCORE TAB ── */}
         {tab === "score" && (
@@ -1198,7 +1231,7 @@ export default function ATSv6() {
               </div>
             )}
             
-            <div style={{ display:"grid", gridTemplateColumns:"280px 1fr", gap:24 }}>
+            <div className="ats-layer-grid">
               {/* Left Column: Improvements List */}
               <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
                 <div style={card()}>
@@ -1267,7 +1300,7 @@ export default function ATSv6() {
         )}
         {/* ── INDUSTRY TAB ── */}
         {tab === "industry" && (
-          <div style={{ display:"grid", gridTemplateColumns:"320px 1fr", gap:24 }}>
+          <div className="ats-industry-grid">
             <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
               <div style={card()}>
                 <div style={{ fontSize:12, color:T.muted, fontFamily:"'JetBrains Mono',monospace", marginBottom:12 }}>INDUSTRY CLASSIFICATION</div>
@@ -1310,7 +1343,7 @@ export default function ATSv6() {
                 <span style={{ fontSize:13, color:T.muted, fontFamily:"'JetBrains Mono',monospace" }}>Density: {rp.keywords.density}%</span>
               </div>
               
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:32 }}>
+              <div className="ats-kw-grid">
                 <div>
                   <div style={{ fontSize:12, color:T.green, fontWeight:700, marginBottom:12, display:"flex", alignItems:"center", gap:6 }}>✓ Found ({rp.keywords.found.length})</div>
                   <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
@@ -1339,7 +1372,7 @@ export default function ATSv6() {
 
         {/* ── ATS PLATFORMS TAB ── */}
         {tab === "platforms" && (
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(320px, 1fr))", gap:20 }}>
+          <div className="ats-platforms-grid">
             {rp.platforms.map(p => (
               <div key={p.name} style={card()}>
                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:16 }}>
@@ -1370,7 +1403,7 @@ export default function ATSv6() {
         )}
         {/* ── COVER LETTER TAB ── */}
         {tab === "cover" && (
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 280px", gap:20 }}>
+          <div className="ats-cover-grid">
             <div style={card({ padding:0, overflow:"hidden" })}>
               <div style={{ background:`${T.accent}10`, padding:"16px 24px", borderBottom:`1px solid ${T.accentBorder}`, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                 <div>
@@ -1496,7 +1529,7 @@ export default function ATSv6() {
                   </div>
                   <textarea value={linkedin.about||""} onChange={e => setLinkedin(p => ({...p, about:e.target.value}))} style={{ width:"100%", minHeight:220, padding:16, background:"rgba(255,255,255,.02)", border:`1px solid ${T.border}`, borderRadius:10, color:T.text, fontSize:13, fontFamily:"Georgia,serif", lineHeight:1.85, resize:"vertical", outline:"none" }} />
                 </div>
-                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+                <div className="ats-li-grid">
                   <div style={card()}>
                     <div style={{ fontWeight:700, fontSize:13, marginBottom:10 }}>Top 15 Skills to Add</div>
                     <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:10 }}>
@@ -1518,7 +1551,7 @@ export default function ATSv6() {
 
         {/* ── EDITOR TAB ── */}
         {tab === "editor" && (
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 260px", gap:14 }}>
+          <div className="ats-editor-grid">
             <div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10, flexWrap:"wrap", gap:8 }}>
                 <div>

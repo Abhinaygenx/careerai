@@ -46,9 +46,9 @@ export default function HeroSection() {
 
                     {/* Headline */}
                     <h1 className={styles.title}>
-                        <span className={styles.animateFadeUp} style={{ animationDelay: '0.2s', display: 'inline-block' }}>Get Hired Faster with </span>{' '}
-                        <span className={`${styles.highlight} ${styles.animateFadeUp}`} style={{ animationDelay: '0.3s', display: 'inline-block' }}>AI-Powered</span><br />
-                        <span className={styles.animateFadeUp} style={{ animationDelay: '0.4s', display: 'inline-block' }}>Career Tools</span>
+                        <span className={styles.animateFadeUp} style={{ animationDelay: '0.2s', display: 'inline-block' }}>The Ultimate </span>{' '}
+                        <span className={`${styles.highlight} ${styles.animateFadeUp}`} style={{ animationDelay: '0.3s', display: 'inline-block' }}>ATS Score Checker</span><br />
+                        <span className={styles.animateFadeUp} style={{ animationDelay: '0.4s', display: 'inline-block' }}>& AI Career Tools</span>
                     </h1>
 
                     {/* Subtitle */}

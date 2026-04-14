@@ -14,9 +14,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Career.AI - AI-Powered Career Intelligence",
-  description: "Get hired faster with AI-powered resume optimization, ATS score checking, and intelligent job application tools. The complete AI hiring toolkit for India.",
-  keywords: "ATS score checker, resume builder, AI resume, job application, career tools, India jobs",
+  title: "Career.AI - Free ATS Score Checker & Resume Analyzer",
+  description: "Check your ATS score instantly with our free AI ATS score checker. Get hired faster with AI-powered resume optimization and intelligent match scoring.",
+  keywords: "ATS score checker, free ATS resume checker, resume score, AI resume analyzer, resume builder, ATS formatting",
 };
 
 import { AuthProvider } from "../context/AuthContext";

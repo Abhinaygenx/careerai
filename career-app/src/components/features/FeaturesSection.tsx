@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from './FeaturesSection.module.css';
 
@@ -60,7 +63,29 @@ const secondaryFeatures = [
     }
 ];
 
+const HEADING_TEXT = 'Everything You Need to Get Hired';
+
 export default function FeaturesSection() {
+    const headingRef = useRef<HTMLHeadingElement>(null);
+
+    useEffect(() => {
+        const el = headingRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    el.classList.add(styles.revealed);
+                    observer.unobserve(el);
+                }
+            },
+            { threshold: 0.8 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <section className={styles.features}>
             <div className={styles.container}>
@@ -69,7 +94,18 @@ export default function FeaturesSection() {
                     <span className={styles.badge}>
                         <span>⚡</span> AI-Powered Tools
                     </span>
-                    <h2 className={styles.title}>Everything You Need to Get Hired</h2>
+                    <h2 ref={headingRef} className={styles.title}>
+                        {HEADING_TEXT.split(' ').map((word, i) => (
+                            <span
+                                key={i}
+                                className={styles.wordReveal}
+                                style={{ '--word-index': i } as React.CSSProperties}
+                            >
+                                {word}
+                                {i < HEADING_TEXT.split(' ').length - 1 ? '\u00a0' : ''}
+                            </span>
+                        ))}
+                    </h2>
                     <p className={styles.subtitle}>
                         From ATS optimization to auto-apply automation, we&apos;ve built the complete AI hiring toolkit for India
                     </p>

@@ -209,14 +209,22 @@ async function parsePDF(buf) {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
     const items = content.items;
-    const xPos = items.map(it => Math.round(it.transform[4] / 10) * 10);
-    const xClusters = [...new Set(xPos)].filter(x => xPos.filter(p => Math.abs(p - x) < 35).length > 3);
-    const multiColumn = xClusters.length >= 5;
-    const pageText = items.map(x => x.str).join(" ");
+    
+    let pageText = "";
+    let lastY = null;
+    for (const item of items) {
+      if (lastY !== null && Math.abs(item.transform[5] - lastY) > 4) {
+        pageText += "\n" + item.str;
+      } else {
+        pageText += (lastY !== null && item.str.trim() ? " " : "") + item.str;
+      }
+      if (item.str.trim()) lastY = item.transform[5];
+    }
+    
     fullText += pageText + "\n";
-    pageLayouts.push({ page: i, multiColumn, xClusters: xClusters.length, charCount: pageText.length });
+    pageLayouts.push({ page: i, multiColumn: false, xClusters: 0, charCount: pageText.length });
   }
-  const hasMultiColumn = pageLayouts.some(p => p.multiColumn);
+  const hasMultiColumn = false; // Disabled for parity with DOCX
   return {
     text: fullText,
     structure: {
@@ -239,11 +247,24 @@ async function parseDOCX(buf) {
   tables.forEach(t => { tableCellWords += t.textContent.split(/\s+/).filter(Boolean).length; });
   const headings = doc.querySelectorAll("h1,h2,h3,h4,h5,h6");
   const images   = doc.querySelectorAll("img");
+  
+  // Use HTML to ensure bullets are included in the extracted text, as extractRawText often strips them
+  let enhancedText = "";
+  doc.body.childNodes.forEach(node => {
+    if (node.tagName === 'UL' || node.tagName === 'OL') {
+      node.querySelectorAll('li').forEach(li => enhancedText += "• " + li.textContent + "\n");
+    } else if (node.tagName === 'P' || /^H[1-6]$/.test(node.tagName)) {
+      enhancedText += node.textContent + "\n";
+    } else if (node.textContent.trim()) {
+      enhancedText += node.textContent + "\n";
+    }
+  });
+
   return {
-    text: textResult.value,
+    text: enhancedText || textResult.value,
     structure: {
-      hasTable: tables.length > 0, tableCount: tables.length, tableCellWords,
-      hasImages: images.length > 0, imageCount: images.length,
+      hasTable: false, tableCount: 0, tableCellWords: 0, // Disabled for parity with PDF
+      hasImages: false, imageCount: 0, // Disabled for parity with PDF
       headings: [...headings].map(h => h.textContent.trim()),
       headingCount: headings.length, hasMultiColumn: false, type: "docx"
     }

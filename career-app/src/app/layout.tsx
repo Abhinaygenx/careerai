@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +7,16 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      <body className={`${inter.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} antialiased`}>
         <ThemeProvider>
           <AuthProvider>
             {children}

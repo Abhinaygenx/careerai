@@ -943,7 +943,7 @@ export default function ATSv6() {
   useEffect(() => {
     const s = document.createElement("style");
     s.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+      
       *, *::before, *::after { box-sizing: border-box; }
       @keyframes spin   { to { transform: rotate(360deg); } }
       @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
@@ -1074,11 +1074,11 @@ export default function ATSv6() {
 
       <div style={{ maxWidth:900, margin:"0 auto", padding:"52px 16px 72px" }}>
         <div style={{ textAlign:"center", marginBottom:48 }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"5px 16px", borderRadius:20, background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:"var(--text-primary)", fontSize:11, fontFamily:"'JetBrains Mono',monospace", marginBottom:20, letterSpacing:.7 }}>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"5px 16px", borderRadius:20, background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:"var(--text-primary)", fontSize:11, fontFamily:"var(--font-mono)", marginBottom:20, letterSpacing:.7 }}>
             <span style={{ width:6, height:6, borderRadius:"50%", background:T.accent, animation:"pulse 2s infinite" }}/>
             AI-POWERED ANALYSIS ENGINE
           </div>
-          <h1 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(32px,5.5vw,58px)", fontWeight:700, lineHeight:1.04, letterSpacing:"-2px", marginBottom:14, marginTop:0 }}>
+          <h1 style={{ fontFamily:"var(--font-heading)", fontSize:"clamp(32px,5.5vw,58px)", fontWeight:700, lineHeight:1.04, letterSpacing:"-2px", marginBottom:14, marginTop:0 }}>
             Resume ATS <br />
             <span className="text-accent">
               Score Checker
@@ -1099,7 +1099,7 @@ export default function ATSv6() {
             { l:"L5", name:"Format",    pts:"10pts", col:T.l5, items:["Table removal","Multi-column detect","Unicode cleanup","Page structure","File format signal"] },
           ].map(({ l, name, pts, col, items }) => (
             <div key={l} style={{ ...card(), borderTop:`2px solid ${col}`, padding:"12px 14px" }}>
-              <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:col, marginBottom:2 }}>{l} — {name}</div>
+              <div style={{ fontFamily:"var(--font-mono)", fontSize:9, color:col, marginBottom:2 }}>{l} — {name}</div>
               <div style={{ fontWeight:700, fontSize:22, color:col, marginBottom:8 }}>{pts}</div>
               {items.map(it => <div key={it} style={{ fontSize:10, color:T.muted, lineHeight:1.8, display:"flex", gap:4 }}><span style={{ color:col, flexShrink:0 }}>›</span>{it}</div>)}
             </div>
@@ -1119,7 +1119,7 @@ export default function ATSv6() {
           <div style={{ fontWeight:700, fontSize:20, marginBottom:6 }}>Drop your resume here</div>
           <div style={{ color:T.muted, fontSize:13, marginBottom:18 }}>or click to browse · PDF or DOCX · max 15MB</div>
           <div style={{ display:"flex", justifyContent:"center", gap:10 }}>
-            {["PDF", "DOCX"].map(t => <div key={t} style={{ padding:"4px 16px", borderRadius:7, fontFamily:"'JetBrains Mono',monospace", fontSize:12, background:"rgba(255,255,255,.04)", border:`1px solid ${T.border}`, color:T.accent }}>{t}</div>)}
+            {["PDF", "DOCX"].map(t => <div key={t} style={{ padding:"4px 16px", borderRadius:7, fontFamily:"var(--font-mono)", fontSize:12, background:"rgba(255,255,255,.04)", border:`1px solid ${T.border}`, color:T.accent }}>{t}</div>)}
           </div>
           <input ref={fileRef} type="file" accept=".pdf,.docx" style={{ display:"none" }} onChange={e => handleFile(e.target.files[0])} />
         </div>
@@ -1138,13 +1138,13 @@ export default function ATSv6() {
           {jdOpen && (
             <div>
               <div style={{ display:"flex", gap:8, marginBottom:10 }}>
-                <input value={jobURL} onChange={e => setJobURL(e.target.value)} placeholder="Paste job URL (we'll scrape it via CORS proxy)" style={{ flex:1, padding:"9px 12px", background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, borderRadius:8, color:T.text, fontSize:12, fontFamily:"'Space Grotesk',sans-serif", outline:"none" }} />
-                <button onClick={fetchURL} disabled={urlLoading || !jobURL.startsWith("http")} style={{ padding:"9px 16px", borderRadius:8, cursor:"pointer", background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:T.accent, fontSize:12, fontWeight:600, opacity:urlLoading || !jobURL.startsWith("http") ? .5 : 1, fontFamily:"'Space Grotesk',sans-serif" }}>
+                <input value={jobURL} onChange={e => setJobURL(e.target.value)} placeholder="Paste job URL (we'll scrape it via CORS proxy)" style={{ flex:1, padding:"9px 12px", background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, borderRadius:8, color:T.text, fontSize:12, fontFamily:"var(--font-heading)", outline:"none" }} />
+                <button onClick={fetchURL} disabled={urlLoading || !jobURL.startsWith("http")} style={{ padding:"9px 16px", borderRadius:8, cursor:"pointer", background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:T.accent, fontSize:12, fontWeight:600, opacity:urlLoading || !jobURL.startsWith("http") ? .5 : 1, fontFamily:"var(--font-heading)" }}>
                   {urlLoading ? "Scraping…" : "Fetch JD"}
                 </button>
               </div>
-              <textarea value={jobDesc} onChange={e => setJobDesc(e.target.value)} placeholder="Or paste job description text here…" style={{ width:"100%", minHeight:100, padding:12, background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, borderRadius:8, color:T.text, fontSize:12, lineHeight:1.65, resize:"vertical", outline:"none", fontFamily:"'Space Grotesk',sans-serif" }} />
-              {jobDesc.trim().length > 60 && <div style={{ fontSize:10, color:T.green, marginTop:4, fontFamily:"'JetBrains Mono',monospace" }}>✓ {jobDesc.split(/\s+/).filter(Boolean).length} words — TF-IDF cosine similarity will run against your resume</div>}
+              <textarea value={jobDesc} onChange={e => setJobDesc(e.target.value)} placeholder="Or paste job description text here…" style={{ width:"100%", minHeight:100, padding:12, background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, borderRadius:8, color:T.text, fontSize:12, lineHeight:1.65, resize:"vertical", outline:"none", fontFamily:"var(--font-heading)" }} />
+              {jobDesc.trim().length > 60 && <div style={{ fontSize:10, color:T.green, marginTop:4, fontFamily:"var(--font-mono)" }}>✓ {jobDesc.split(/\s+/).filter(Boolean).length} words — TF-IDF cosine similarity will run against your resume</div>}
             </div>
           )}
         </div>
@@ -1152,7 +1152,7 @@ export default function ATSv6() {
         <div style={{ textAlign:"center", marginTop:8 }}>
           <div style={{ display:"flex", justifyContent:"center", flexWrap:"wrap", gap:5, marginBottom:8 }}>
             {["Workday","Taleo","Greenhouse","Lever","iCIMS","SmartRecruiters","Jobvite","BambooHR"].map(p => (
-              <div key={p} style={{ padding:"2px 9px", borderRadius:5, fontSize:9, fontFamily:"'JetBrains Mono',monospace", background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, color:T.muted }}>✓ {p}</div>
+              <div key={p} style={{ padding:"2px 9px", borderRadius:5, fontSize:9, fontFamily:"var(--font-mono)", background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, color:T.muted }}>✓ {p}</div>
             ))}
           </div>
           <p style={{ color:T.muted, fontSize:11 }}>Grading: 90–100 = A+ (exceptional) · 77–89 = B+/A (strong) · 58–76 = C+/B (average) · Below 58 = needs major work</p>
@@ -1162,7 +1162,7 @@ export default function ATSv6() {
   );
   /* ───────────────────────────── LOADING ───────────────────────────── */
   if (stage === "analyzing") return (
-    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Space Grotesk',sans-serif" }}>
+    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--font-heading)" }}>
       <div style={{ width:420, padding:32, background:T.surface, border:`1px solid ${T.border}`, borderRadius:18, textAlign:"center", position:"relative", overflow:"hidden" }}>
         <div style={{ position:"absolute", top:0, left:0, height:2, background:T.accent, width:`${(step / (ANALYZE_STEPS.length - 1)) * 100}%`, transition:"width .4s ease" }}/>
         <div style={{ position:"absolute", top:0, left:0, right:0, height:60, background:"linear-gradient(rgba(0,212,255,.15),transparent)", zIndex:0 }}/>
@@ -1173,10 +1173,10 @@ export default function ATSv6() {
             <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", fontWeight:600, fontSize:15, color:T.accent }}>{step+1}</div>
           </div>
           <div style={{ fontWeight:700, fontSize:18, marginBottom:8 }}>Analyzing "{file?.name}"</div>
-          <div style={{ color:T.accent, fontSize:13, height:20, fontFamily:"'JetBrains Mono',monospace", letterSpacing:.5 }}>{ANALYZE_STEPS[step]?.label || "Finalizing report..."}</div>
+          <div style={{ color:T.accent, fontSize:13, height:20, fontFamily:"var(--font-mono)", letterSpacing:.5 }}>{ANALYZE_STEPS[step]?.label || "Finalizing report..."}</div>
           <div style={{ marginTop:24, textAlign:"left" }}>
             {ANALYZE_STEPS.map((s, i) => (
-              <div key={i} style={{ display:i <= step ? "flex" : "none", alignItems:"center", gap:10, marginBottom:8, fontSize:12, color:i === step ? T.text : T.muted, fontFamily:"'JetBrains Mono',monospace" }}>
+              <div key={i} style={{ display:i <= step ? "flex" : "none", alignItems:"center", gap:10, marginBottom:8, fontSize:12, color:i === step ? T.text : T.muted, fontFamily:"var(--font-mono)" }}>
                 <span style={{ color:i === step ? T.accent : T.green }}>{i === step ? "›" : "✓"}</span>
                 <span className={i === step ? "fade-up" : ""}>{s.layer && <span style={{ color:T[s.layer.toLowerCase()], marginRight:6 }}>{s.layer}</span>}{s.label}</span>
               </div>
@@ -1200,9 +1200,9 @@ export default function ATSv6() {
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16, flexWrap:"wrap", gap:12 }}>
             <div style={{ minWidth:0 }}>
               <div style={{ display:"flex", alignItems:"center", flexWrap:"wrap", gap:6, marginBottom:6 }}>
-                <div style={{ padding:"4px 10px", borderRadius:20, background:T.surface, border:`1px solid ${T.border}`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:T.muted, overflow:"hidden", textOverflow:"ellipsis", maxWidth:180, whiteSpace:"nowrap" }}>{rp.filename}</div>
-                <div style={{ padding:"4px 10px", borderRadius:20, background:"var(--accent-glow)", border:`1px solid var(--border)`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:"var(--text-accent)" }}>{rp.industry}</div>
-                {delta && <div style={{ padding:"4px 10px", borderRadius:20, background:delta.overall>0?T.greenDim:T.redDim, border:`1px solid ${delta.overall>0?T.greenBorder:T.redBorder}`, fontSize:10, fontFamily:"'JetBrains Mono',monospace", color:delta.overall>0?T.green:T.red }}>{delta.overall>0?"+":""}{delta.overall} pts</div>}
+                <div style={{ padding:"4px 10px", borderRadius:20, background:T.surface, border:`1px solid ${T.border}`, fontSize:10, fontFamily:"var(--font-mono)", color:T.muted, overflow:"hidden", textOverflow:"ellipsis", maxWidth:180, whiteSpace:"nowrap" }}>{rp.filename}</div>
+                <div style={{ padding:"4px 10px", borderRadius:20, background:"var(--accent-glow)", border:`1px solid var(--border)`, fontSize:10, fontFamily:"var(--font-mono)", color:"var(--text-accent)" }}>{rp.industry}</div>
+                {delta && <div style={{ padding:"4px 10px", borderRadius:20, background:delta.overall>0?T.greenDim:T.redDim, border:`1px solid ${delta.overall>0?T.greenBorder:T.redBorder}`, fontSize:10, fontFamily:"var(--font-mono)", color:delta.overall>0?T.green:T.red }}>{delta.overall>0?"+":""}{delta.overall} pts</div>}
               </div>
               <h1 style={{ margin:0, fontSize:"clamp(18px,4vw,26px)", fontWeight:700, color:T.text }}>ATS Analysis Report</h1>
             </div>
@@ -1264,7 +1264,7 @@ export default function ATSv6() {
                     {rp.improvements.map((imp, i) => (
                       <div key={i} style={{ padding:"10px 12px", borderRadius:10, background:`${imp.priority==="critical"?T.red:imp.priority==="high"?T.amber:T.accent}12`, borderLeft:`3px solid ${imp.priority==="critical"?T.red:imp.priority==="high"?T.amber:T.accent}` }}>
                         <div style={{ display:"flex", justifyContent:"space-between", marginBottom:4 }}>
-                          <span style={{ fontSize:10, fontWeight:700, fontFamily:"'JetBrains Mono',monospace", color:imp.priority==="critical"?T.red:imp.priority==="high"?T.amber:T.accent }}>{imp.cat.toUpperCase()}</span>
+                          <span style={{ fontSize:10, fontWeight:700, fontFamily:"var(--font-mono)", color:imp.priority==="critical"?T.red:imp.priority==="high"?T.amber:T.accent }}>{imp.cat.toUpperCase()}</span>
                           <span style={{ fontSize:9, color:T.muted }}>{imp.src}</span>
                         </div>
                         <div style={{ fontSize:12, color:T.text, lineHeight:1.5, marginBottom:6 }}>{imp.issue}</div>
@@ -1324,7 +1324,7 @@ export default function ATSv6() {
           <div className="ats-industry-grid">
             <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
               <div style={card()}>
-                <div style={{ fontSize:12, color:T.muted, fontFamily:"'JetBrains Mono',monospace", marginBottom:12 }}>INDUSTRY CLASSIFICATION</div>
+                <div style={{ fontSize:12, color:T.muted, fontFamily:"var(--font-mono)", marginBottom:12 }}>INDUSTRY CLASSIFICATION</div>
                 {rp.industryTop3.map((ind, i) => (
                   <div key={i} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
                     <span style={{ fontSize:13, color:i===0?T.text:T.muted, fontWeight:i===0?700:400 }}>{ind.industry}</span>
@@ -1342,7 +1342,7 @@ export default function ATSv6() {
               
               {rp.keywords.jd && (
                 <div style={card({ borderTop:`3px solid ${T.accent}` })}>
-                  <div style={{ fontSize:12, color:T.accent, fontFamily:"'JetBrains Mono',monospace", marginBottom:6 }}>JD COSINE SIMILARITY</div>
+                  <div style={{ fontSize:12, color:T.accent, fontFamily:"var(--font-mono)", marginBottom:6 }}>JD COSINE SIMILARITY</div>
                   <div style={{ fontSize:32, fontWeight:800, color:T.text, marginBottom:4 }}>{rp.keywords.jd.score}%</div>
                   <div style={{ fontSize:11, color:T.muted, lineHeight:1.5, marginBottom:16 }}>Actual TF-IDF vector math comparing your resume tokens to the job description tokens. Target 60%+.</div>
                   
@@ -1350,7 +1350,7 @@ export default function ATSv6() {
                     <>
                       <div style={{ fontSize:11, fontWeight:600, marginBottom:8 }}>Missing JD Tokens:</div>
                       <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
-                        {rp.keywords.jd.missing.slice(0, 10).map(t => <span key={t} className="chip" style={{ padding:"2px 8px", borderRadius:4, background:T.redDim, color:T.red, fontSize:10, fontFamily:"'JetBrains Mono',monospace" }}>+ {t}</span>)}
+                        {rp.keywords.jd.missing.slice(0, 10).map(t => <span key={t} className="chip" style={{ padding:"2px 8px", borderRadius:4, background:T.redDim, color:T.red, fontSize:10, fontFamily:"var(--font-mono)" }}>+ {t}</span>)}
                       </div>
                     </>
                   )}
@@ -1361,21 +1361,21 @@ export default function ATSv6() {
             <div style={card()}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
                 <span style={{ fontWeight:700, fontSize:16 }}>O*NET ${rp.industry} Taxonomy</span>
-                <span style={{ fontSize:13, color:T.muted, fontFamily:"'JetBrains Mono',monospace" }}>Density: {rp.keywords.density}%</span>
+                <span style={{ fontSize:13, color:T.muted, fontFamily:"var(--font-mono)" }}>Density: {rp.keywords.density}%</span>
               </div>
               
               <div className="ats-kw-grid">
                 <div>
                   <div style={{ fontSize:12, color:T.green, fontWeight:700, marginBottom:12, display:"flex", alignItems:"center", gap:6 }}>✓ Found ({rp.keywords.found.length})</div>
                   <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
-                    {rp.keywords.found.map(k => <span key={k} style={{ padding:"4px 10px", borderRadius:20, background:T.greenDim, border:`1px solid ${T.greenBorder}`, color:T.green, fontSize:11, fontFamily:"'JetBrains Mono',monospace" }}>{k}</span>)}
+                    {rp.keywords.found.map(k => <span key={k} style={{ padding:"4px 10px", borderRadius:20, background:T.greenDim, border:`1px solid ${T.greenBorder}`, color:T.green, fontSize:11, fontFamily:"var(--font-mono)" }}>{k}</span>)}
                   </div>
                 </div>
                 <div>
                   <div style={{ fontSize:12, color:T.red, fontWeight:700, marginBottom:12, display:"flex", alignItems:"center", gap:6 }}>⚠ Missing Core Signals ({rp.keywords.missing.length})</div>
                   <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
                     {rp.keywords.missing.length === 0 ? <span style={{ fontSize:11, color:T.muted }}>All core keywords present!</span> : 
-                     rp.keywords.missing.map(k => <span key={k} className="chip" style={{ padding:"4px 10px", borderRadius:20, background:T.redDim, border:`1px dashed ${T.redBorder}`, color:T.red, fontSize:11, fontFamily:"'JetBrains Mono',monospace" }}>+ {k}</span>)}
+                     rp.keywords.missing.map(k => <span key={k} className="chip" style={{ padding:"4px 10px", borderRadius:20, background:T.redDim, border:`1px dashed ${T.redBorder}`, color:T.red, fontSize:11, fontFamily:"var(--font-mono)" }}>+ {k}</span>)}
                   </div>
                 </div>
               </div>
@@ -1384,7 +1384,7 @@ export default function ATSv6() {
                 <div style={{ fontSize:12, color:T.accent, fontWeight:700, marginBottom:12 }}>Bonus Differentiators Found ({rp.keywords.bonus.length})</div>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
                   {rp.keywords.bonus.length === 0 ? <span style={{ fontSize:11, color:T.muted }}>None found. Add specific modern tools.</span> :
-                   rp.keywords.bonus.map(k => <span key={k} style={{ padding:"4px 10px", borderRadius:20, background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:T.accent, fontSize:11, fontFamily:"'JetBrains Mono',monospace" }}>{k}</span>)}
+                   rp.keywords.bonus.map(k => <span key={k} style={{ padding:"4px 10px", borderRadius:20, background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:T.accent, fontSize:11, fontFamily:"var(--font-mono)" }}>{k}</span>)}
                 </div>
               </div>
             </div>
@@ -1461,11 +1461,11 @@ export default function ATSv6() {
               <div style={card()}>
                 <div style={{ fontWeight:700, fontSize:13, marginBottom:16 }}>Generation Settings</div>
                 <div style={{ marginBottom:12 }}>
-                  <div style={{ fontSize:10, color:T.muted, marginBottom:4, fontFamily:"'JetBrains Mono',monospace", letterSpacing:.5 }}>TARGET COMPANY</div>
-                  <input value={clCompany} onChange={e => setClCompany(e.target.value)} placeholder="e.g. Google, Stripe" style={{ width:"100%", padding:"8px 10px", background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, borderRadius:6, color:T.text, fontSize:12, outline:"none", fontFamily:"'Space Grotesk',sans-serif" }} />
+                  <div style={{ fontSize:10, color:T.muted, marginBottom:4, fontFamily:"var(--font-mono)", letterSpacing:.5 }}>TARGET COMPANY</div>
+                  <input value={clCompany} onChange={e => setClCompany(e.target.value)} placeholder="e.g. Google, Stripe" style={{ width:"100%", padding:"8px 10px", background:"rgba(255,255,255,.03)", border:`1px solid ${T.border}`, borderRadius:6, color:T.text, fontSize:12, outline:"none", fontFamily:"var(--font-heading)" }} />
                 </div>
                 <div style={{ marginBottom:16 }}>
-                  <div style={{ fontSize:10, color:T.muted, marginBottom:4, fontFamily:"'JetBrains Mono',monospace", letterSpacing:.5 }}>JOB DESCRIPTION CONTEXT</div>
+                  <div style={{ fontSize:10, color:T.muted, marginBottom:4, fontFamily:"var(--font-mono)", letterSpacing:.5 }}>JOB DESCRIPTION CONTEXT</div>
                   {jobDesc ? (
                     <div style={{ fontSize:11, color:T.green, display:"flex", alignItems:"center", gap:6 }}><span style={{ fontSize:14 }}>✓</span> JD loaded ({jobDesc.split(" ").length} words)</div>
                   ) : (
@@ -1482,7 +1482,7 @@ export default function ATSv6() {
                     finally { setClLoading(false); }
                   }}
                   disabled={clLoading}
-                  style={{ width:"100%", padding:"10px", borderRadius:6, cursor:clLoading?"wait":"pointer", background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:T.accent, fontSize:12, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}
+                  style={{ width:"100%", padding:"10px", borderRadius:6, cursor:clLoading?"wait":"pointer", background:T.accentDim, border:`1px solid ${T.accentBorder}`, color:T.accent, fontSize:12, fontWeight:700, fontFamily:"var(--font-heading)" }}
                 >
                   {clLoading ? "Generating..." : "Generate Cover Letter"}
                 </button>
@@ -1508,7 +1508,7 @@ export default function ATSv6() {
                 <div style={{ fontWeight:700, fontSize:16, marginBottom:4 }}>LinkedIn Profile Optimizer</div>
                 <div style={{ color:T.muted, fontSize:12, lineHeight:1.65 }}>3 headline options · Full About section · Top 15 skills · One profile-specific tip</div>
               </div>
-              <button onClick={async () => { setLiLoading(true); setLinkedin(null); try { const li = await generateLinkedIn(editText, rp.industry, rp.experienceLevel); setLinkedin(li); } catch (e) { alert("LinkedIn generation failed: " + e.message); } finally { setLiLoading(false); } }} disabled={liLoading} style={{ padding:"10px 22px", borderRadius:10, cursor:liLoading?"wait":"pointer", background:"linear-gradient(135deg,#0077b5,#0a66c2)", border:"none", color:"#fff", fontFamily:"'Space Grotesk',sans-serif", fontWeight:700, fontSize:13, opacity:liLoading?0.7:1 }}>
+              <button onClick={async () => { setLiLoading(true); setLinkedin(null); try { const li = await generateLinkedIn(editText, rp.industry, rp.experienceLevel); setLinkedin(li); } catch (e) { alert("LinkedIn generation failed: " + e.message); } finally { setLiLoading(false); } }} disabled={liLoading} style={{ padding:"10px 22px", borderRadius:10, cursor:liLoading?"wait":"pointer", background:"linear-gradient(135deg,#0077b5,#0a66c2)", border:"none", color:"#fff", fontFamily:"var(--font-heading)", fontWeight:700, fontSize:13, opacity:liLoading?0.7:1 }}>
                 {liLoading ? "Generating…" : "⊞ Generate LinkedIn Content"}
               </button>
             </div>
@@ -1534,7 +1534,7 @@ export default function ATSv6() {
                   <div style={{ fontWeight:700, fontSize:14, marginBottom:12 }}>Headline Options</div>
                   {(linkedin.headlines || []).map((h, i) => (
                     <div key={i} style={{ display:"flex", gap:10, alignItems:"flex-start", marginBottom:10, padding:"11px 14px", borderRadius:10, background:`rgba(0,119,181,${i===0?0.1:0.05})`, border:`1px solid rgba(0,119,181,${i===0?0.4:0.2})` }}>
-                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:"#0077b5", padding:"2px 7px", borderRadius:4, background:"rgba(0,119,181,.1)", flexShrink:0, marginTop:2 }}>#{i+1}</div>
+                      <div style={{ fontFamily:"var(--font-mono)", fontSize:9, color:"#0077b5", padding:"2px 7px", borderRadius:4, background:"rgba(0,119,181,.1)", flexShrink:0, marginTop:2 }}>#{i+1}</div>
                       <div style={{ flex:1, fontSize:13, color:T.text, lineHeight:1.6 }}>{h}</div>
                       <button onClick={() => copy(h, `hl-${i}`)} style={{ padding:"4px 10px", borderRadius:6, cursor:"pointer", background:copied===`hl-${i}`?T.greenDim:T.accentDim, border:`1px solid ${copied===`hl-${i}`?T.greenBorder:T.accentBorder}`, color:copied===`hl-${i}`?T.green:T.accent, fontSize:10, fontWeight:600, flexShrink:0 }}>{copied===`hl-${i}`?"✓ Copied":"Copy"}</button>
                     </div>
@@ -1554,7 +1554,7 @@ export default function ATSv6() {
                   <div style={card()}>
                     <div style={{ fontWeight:700, fontSize:13, marginBottom:10 }}>Top 15 Skills to Add</div>
                     <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:10 }}>
-                      {(linkedin.skills||[]).map((sk, i) => <div key={i} style={{ padding:"4px 12px", borderRadius:20, background:"rgba(0,119,181,.1)", border:"1px solid rgba(0,119,181,.3)", color:"#60a5fa", fontSize:11, fontFamily:"'JetBrains Mono',monospace" }}>{sk}</div>)}
+                      {(linkedin.skills||[]).map((sk, i) => <div key={i} style={{ padding:"4px 12px", borderRadius:20, background:"rgba(0,119,181,.1)", border:"1px solid rgba(0,119,181,.3)", color:"#60a5fa", fontSize:11, fontFamily:"var(--font-mono)" }}>{sk}</div>)}
                     </div>
                     <button onClick={() => copy((linkedin.skills||[]).join(", "),"skills")} style={{ width:"100%", padding:"7px", borderRadius:8, cursor:"pointer", background:copied==="skills"?T.greenDim:T.accentDim, border:`1px solid ${copied==="skills"?T.greenBorder:T.accentBorder}`, color:copied==="skills"?T.green:T.accent, fontSize:11, fontWeight:600 }}>
                       {copied==="skills"?"✓ Copied all skills!":"Copy all 15 skills"}
@@ -1585,8 +1585,8 @@ export default function ATSv6() {
                   <button onClick={() => generateReport(rp, rp.filename)} style={{ padding:"6px 13px", borderRadius:8, cursor:"pointer", background:T.amberDim, border:`1px solid ${T.amberBorder}`, color:T.amber, fontSize:11 }}>↓ ATS Report</button>
                 </div>
               </div>
-              <textarea value={editText} onChange={e => setEditText(e.target.value)} spellCheck style={{ width:"100%", minHeight:560, padding:18, background:"rgba(255,255,255,.02)", border:`1px solid ${T.accentBorder}`, borderRadius:12, color:T.text, fontSize:12, fontFamily:"'JetBrains Mono',monospace", lineHeight:1.85, resize:"vertical", outline:"none" }} />
-              <div style={{ display:"flex", justifyContent:"space-between", marginTop:5, fontSize:9, fontFamily:"'JetBrains Mono',monospace", color:T.muted }}>
+              <textarea value={editText} onChange={e => setEditText(e.target.value)} spellCheck style={{ width:"100%", minHeight:560, padding:18, background:"rgba(255,255,255,.02)", border:`1px solid ${T.accentBorder}`, borderRadius:12, color:T.text, fontSize:12, fontFamily:"var(--font-mono)", lineHeight:1.85, resize:"vertical", outline:"none" }} />
+              <div style={{ display:"flex", justifyContent:"space-between", marginTop:5, fontSize:9, fontFamily:"var(--font-mono)", color:T.muted }}>
                 <span>{editText.split(/\s+/).filter(Boolean).length} words · {editText.length} chars</span>
                 <span style={{ color:T.green }}>● Re-upload to get an updated score</span>
               </div>
@@ -1596,15 +1596,15 @@ export default function ATSv6() {
               <div style={{ fontSize:10, color:T.muted, marginBottom:12, lineHeight:1.5 }}>Apply to your resume, then re-upload</div>
               {(rp.editorHints || []).map((hint, i) => (
                 <div key={i} className="hint-row" style={{ padding:"7px 9px", borderRadius:7, marginBottom:6, background:`rgba(0,212,255,.03)`, border:`1px solid ${T.border}`, transition:"all .18s" }}>
-                  <div style={{ fontSize:8, color:T.accent, fontFamily:"'JetBrains Mono',monospace", marginBottom:3 }}>HINT {i+1}</div>
+                  <div style={{ fontSize:8, color:T.accent, fontFamily:"var(--font-mono)", marginBottom:3 }}>HINT {i+1}</div>
                   <div style={{ fontSize:11, color:T.hint, lineHeight:1.6 }}>{hint}</div>
                 </div>
               ))}
               <div style={{ borderTop:`1px solid ${T.border}`, paddingTop:12, marginTop:8 }}>
-                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:T.muted, marginBottom:8 }}>MISSING KEYWORDS — CLICK TO ADD</div>
+                <div style={{ fontFamily:"var(--font-mono)", fontSize:9, color:T.muted, marginBottom:8 }}>MISSING KEYWORDS — CLICK TO ADD</div>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
                   {rp.keywords?.missing?.slice(0, 12).map(k => (
-                    <span key={k} className="chip" onClick={() => setEditText(p => p + "\n" + k)} style={{ padding:"2px 8px", borderRadius:20, fontSize:10, background:T.redDim, border:`1px solid ${T.redBorder}`, color:T.red, fontFamily:"'JetBrains Mono',monospace", cursor:"pointer", transition:"all .15s" }}>+ {k}</span>
+                    <span key={k} className="chip" onClick={() => setEditText(p => p + "\n" + k)} style={{ padding:"2px 8px", borderRadius:20, fontSize:10, background:T.redDim, border:`1px solid ${T.redBorder}`, color:T.red, fontFamily:"var(--font-mono)", cursor:"pointer", transition:"all .15s" }}>+ {k}</span>
                   ))}
                 </div>
               </div>

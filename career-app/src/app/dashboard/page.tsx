@@ -280,6 +280,11 @@ export default function DashboardPage() {
                                         <span className={styles.actionTitle}>Practice Interview</span>
                                         <span className={styles.actionDesc}>Prepare with AI coach</span>
                                     </Link>
+                                    <Link href="/dashboard/meetings" className={styles.actionCard}>
+                                        <span className={styles.actionIcon}>📅</span>
+                                        <span className={styles.actionTitle}>Meeting Tracker</span>
+                                        <span className={styles.actionDesc}>Manage meetings & track health</span>
+                                    </Link>
                                 </div>
                             </div>
 

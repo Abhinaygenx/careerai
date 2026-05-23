@@ -1,0 +1,63 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Meeting {
+  id              String        @id @default(uuid())
+  title           String
+  description     String?
+  type            String        // STANDUP|ONE_ON_ONE|TEAM|CLIENT|INTERVIEW|REVIEW
+  startTime       DateTime
+  endTime         DateTime
+  timezone        String
+  location        String        // online/offline
+  meetLink        String?
+  status          String        @default("SCHEDULED") // SCHEDULED|COMPLETED|CANCELLED|RESCHEDULED
+  recurrence      String        @default("NONE")      // NONE|DAILY|WEEKLY|BIWEEKLY|MONTHLY
+  recurrenceEnd   DateTime?
+  notes           String?
+  priority        String        @default("MEDIUM")    // LOW|MEDIUM|HIGH
+  color           String
+  userId          String
+  tags            String[]
+  reminderMinutes Int[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  attendees       Attendee[]
+  meetingNotes    MeetingNote[]
+  actionItems     ActionItem[]
+}
+
+model Attendee {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  role      String   // HOST|REQUIRED|OPTIONAL
+  rsvp      String   @default("PENDING") // PENDING|ACCEPTED|DECLINED
+  meetingId String
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
+
+model MeetingNote {
+  id        String   @id @default(uuid())
+  meetingId String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
+
+model ActionItem {
+  id        String   @id @default(uuid())
+  meetingId String
+  text      String
+  assignee  String
+  dueDate   DateTime
+  done      Boolean  @default(false)
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}

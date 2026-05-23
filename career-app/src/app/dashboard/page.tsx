@@ -160,6 +160,9 @@ export default function DashboardPage() {
                     <Link href="/auto-apply" className={styles.navItem}>
                         <span>🚀</span> Auto Apply
                     </Link>
+                    <Link href="/dashboard/meetings" className={styles.navItem}>
+                        <span>📅</span> Meeting Tracker
+                    </Link>
                 </nav>
 
                 <div className={styles.sidebarFooter}>

@@ -1,0 +1,1147 @@
+{
+  "meetings": [
+    {
+      "id": "2n3avvjga7etcm4ve1l3ts",
+      "title": "Daily Engineering Standup",
+      "description": "Detailed discussion for Daily Engineering Standup. Agenda items cover project scopes and deliverables.",
+      "type": "STANDUP",
+      "startTime": "2026-05-13T03:30:00.000Z",
+      "endTime": "2026-05-13T04:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "COMPLETED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "healthScore:70\nDiscuss items relating to project milestone 1.",
+      "priority": "LOW",
+      "color": "#8B7CF7",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "standup"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "i3ziqwb54y3mqm4gaa2rx",
+      "title": "Sync w/ Sarah Connor",
+      "description": "Detailed discussion for Sync w/ Sarah Connor. Agenda items cover project scopes and deliverables.",
+      "type": "ONE_ON_ONE",
+      "startTime": "2026-05-14T05:00:00.000Z",
+      "endTime": "2026-05-14T06:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-lbiv-xyz",
+      "status": "COMPLETED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "healthScore:78\nDiscuss items relating to project milestone 1.",
+      "priority": "MEDIUM",
+      "color": "#2DD4BF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "one_on_one"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "xmhhly15fskyxfnpjskst",
+      "title": "Sprint Planning & Retro",
+      "description": "Detailed discussion for Sprint Planning & Retro. Agenda items cover project scopes and deliverables.",
+      "type": "TEAM",
+      "startTime": "2026-05-15T05:30:00.000Z",
+      "endTime": "2026-05-15T07:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-c0sm-xyz",
+      "status": "COMPLETED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "healthScore:86\nDiscuss items relating to project milestone 1.",
+      "priority": "HIGH",
+      "color": "#4DA3FF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "team",
+        "urgent"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "v8gq6ue0gjoml1g107avdk",
+      "title": "Client Onboarding & Demo",
+      "description": "Detailed discussion for Client Onboarding & Demo. Agenda items cover project scopes and deliverables.",
+      "type": "CLIENT",
+      "startTime": "2026-05-16T07:00:00.000Z",
+      "endTime": "2026-05-16T09:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "COMPLETED",
+      "recurrence": "DAILY",
+      "recurrenceEnd": "2026-05-21T07:00:00.000Z",
+      "notes": "healthScore:94\nDiscuss items relating to project milestone 2.",
+      "priority": "LOW",
+      "color": "#F59E0B",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "client"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "9h0z7fd3j0b1qsl4dg4o5t",
+      "title": "Software Engineer Technical Interview",
+      "description": "Detailed discussion for Software Engineer Technical Interview. Agenda items cover project scopes and deliverables.",
+      "type": "INTERVIEW",
+      "startTime": "2026-05-17T07:30:00.000Z",
+      "endTime": "2026-05-17T08:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-6y01-xyz",
+      "status": "COMPLETED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "healthScore:70\nDiscuss items relating to project milestone 2.",
+      "priority": "MEDIUM",
+      "color": "#10B981",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "interview"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "gst1glnh174afcd2v144i4",
+      "title": "Monthly Product Architecture Review",
+      "description": "Detailed discussion for Monthly Product Architecture Review. Agenda items cover project scopes and deliverables.",
+      "type": "REVIEW",
+      "startTime": "2026-05-18T09:00:00.000Z",
+      "endTime": "2026-05-18T10:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-kk81-xyz",
+      "status": "COMPLETED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "healthScore:78\nDiscuss items relating to project milestone 2.",
+      "priority": "HIGH",
+      "color": "#FF6B9D",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "review",
+        "urgent"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "7e0212jayp4su0u1qm6j8o",
+      "title": "Daily Engineering Standup",
+      "description": "Detailed discussion for Daily Engineering Standup. Agenda items cover project scopes and deliverables.",
+      "type": "STANDUP",
+      "startTime": "2026-05-19T09:30:00.000Z",
+      "endTime": "2026-05-19T11:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "COMPLETED",
+      "recurrence": "WEEKLY",
+      "recurrenceEnd": "2026-06-18T09:30:00.000Z",
+      "notes": "healthScore:86\nDiscuss items relating to project milestone 3.",
+      "priority": "LOW",
+      "color": "#8B7CF7",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "standup"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "m8ohzdek9bmdwnpq4cowu5",
+      "title": "Sync w/ John Doe",
+      "description": "Detailed discussion for Sync w/ John Doe. Agenda items cover project scopes and deliverables.",
+      "type": "ONE_ON_ONE",
+      "startTime": "2026-05-20T11:00:00.000Z",
+      "endTime": "2026-05-20T13:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-3pr7-xyz",
+      "status": "COMPLETED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "healthScore:94\nDiscuss items relating to project milestone 3.",
+      "priority": "MEDIUM",
+      "color": "#2DD4BF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "one_on_one"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "yw43r6lsf1nvu6lhbz6c7",
+      "title": "Sprint Planning & Retro",
+      "description": "Detailed discussion for Sprint Planning & Retro. Agenda items cover project scopes and deliverables.",
+      "type": "TEAM",
+      "startTime": "2026-05-23T03:30:00.000Z",
+      "endTime": "2026-05-23T04:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-yoge-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 3.",
+      "priority": "HIGH",
+      "color": "#4DA3FF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "team",
+        "urgent"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "hdb9pptk2e99amf3kvause",
+      "title": "Client Onboarding & Demo",
+      "description": "Detailed discussion for Client Onboarding & Demo. Agenda items cover project scopes and deliverables.",
+      "type": "CLIENT",
+      "startTime": "2026-05-23T05:00:00.000Z",
+      "endTime": "2026-05-23T06:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 4.",
+      "priority": "LOW",
+      "color": "#F59E0B",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "client"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "8gyhjbss1t8qo2re26son",
+      "title": "Software Engineer Technical Interview",
+      "description": "Detailed discussion for Software Engineer Technical Interview. Agenda items cover project scopes and deliverables.",
+      "type": "INTERVIEW",
+      "startTime": "2026-05-24T05:30:00.000Z",
+      "endTime": "2026-05-24T07:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-hqsb-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 4.",
+      "priority": "MEDIUM",
+      "color": "#10B981",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "interview"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "ju54xuifo2dwt6tqsy573t",
+      "title": "Monthly Product Architecture Review",
+      "description": "Detailed discussion for Monthly Product Architecture Review. Agenda items cover project scopes and deliverables.",
+      "type": "REVIEW",
+      "startTime": "2026-05-25T07:00:00.000Z",
+      "endTime": "2026-05-25T09:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-gcyz-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 4.",
+      "priority": "HIGH",
+      "color": "#FF6B9D",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "review",
+        "urgent"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "vbv2di1by2dbp6v57z88ar",
+      "title": "Daily Engineering Standup",
+      "description": "Detailed discussion for Daily Engineering Standup. Agenda items cover project scopes and deliverables.",
+      "type": "STANDUP",
+      "startTime": "2026-05-26T07:30:00.000Z",
+      "endTime": "2026-05-26T08:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 5.",
+      "priority": "LOW",
+      "color": "#8B7CF7",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "standup"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "k33rm3zjs9p7bs5c623g8",
+      "title": "Sync w/ Tony Stark",
+      "description": "Detailed discussion for Sync w/ Tony Stark. Agenda items cover project scopes and deliverables.",
+      "type": "ONE_ON_ONE",
+      "startTime": "2026-05-27T09:00:00.000Z",
+      "endTime": "2026-05-27T10:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-y1be-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 5.",
+      "priority": "MEDIUM",
+      "color": "#2DD4BF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "one_on_one"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "7nm3kg0two3vunztpofitd",
+      "title": "Sprint Planning & Retro",
+      "description": "Detailed discussion for Sprint Planning & Retro. Agenda items cover project scopes and deliverables.",
+      "type": "TEAM",
+      "startTime": "2026-05-28T09:30:00.000Z",
+      "endTime": "2026-05-28T11:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-34p2-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 5.",
+      "priority": "HIGH",
+      "color": "#4DA3FF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "team",
+        "urgent"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "t4o6htenfchr4nhyacqni",
+      "title": "Client Onboarding & Demo",
+      "description": "Detailed discussion for Client Onboarding & Demo. Agenda items cover project scopes and deliverables.",
+      "type": "CLIENT",
+      "startTime": "2026-05-29T11:00:00.000Z",
+      "endTime": "2026-05-29T13:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 6.",
+      "priority": "LOW",
+      "color": "#F59E0B",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "client"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "lopikhh1osev8qn5i6wnxd",
+      "title": "Software Engineer Technical Interview",
+      "description": "Detailed discussion for Software Engineer Technical Interview. Agenda items cover project scopes and deliverables.",
+      "type": "INTERVIEW",
+      "startTime": "2026-05-30T03:30:00.000Z",
+      "endTime": "2026-05-30T04:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-9ib5-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 6.",
+      "priority": "MEDIUM",
+      "color": "#10B981",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "interview"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "72j6bzl358weyp6cjcrncs",
+      "title": "Monthly Product Architecture Review",
+      "description": "Detailed discussion for Monthly Product Architecture Review. Agenda items cover project scopes and deliverables.",
+      "type": "REVIEW",
+      "startTime": "2026-05-31T05:00:00.000Z",
+      "endTime": "2026-05-31T06:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-m96f-xyz",
+      "status": "CANCELLED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 6.",
+      "priority": "HIGH",
+      "color": "#FF6B9D",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "review",
+        "urgent"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "27r81tlmapi8w5f1ktas6w",
+      "title": "Daily Engineering Standup",
+      "description": "Detailed discussion for Daily Engineering Standup. Agenda items cover project scopes and deliverables.",
+      "type": "STANDUP",
+      "startTime": "2026-06-01T05:30:00.000Z",
+      "endTime": "2026-06-01T07:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "Office Room 4B",
+      "meetLink": "",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 7.",
+      "priority": "LOW",
+      "color": "#8B7CF7",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "standup"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    },
+    {
+      "id": "aa0faqcvuz20vrp8u89zu",
+      "title": "Sync w/ Peter Parker",
+      "description": "Detailed discussion for Sync w/ Peter Parker. Agenda items cover project scopes and deliverables.",
+      "type": "ONE_ON_ONE",
+      "startTime": "2026-06-02T07:00:00.000Z",
+      "endTime": "2026-06-02T09:00:00.000Z",
+      "timezone": "Asia/Kolkata",
+      "location": "online",
+      "meetLink": "https://meet.google.com/abc-ctsz-xyz",
+      "status": "SCHEDULED",
+      "recurrence": "NONE",
+      "recurrenceEnd": null,
+      "notes": "Discuss items relating to project milestone 7.",
+      "priority": "MEDIUM",
+      "color": "#2DD4BF",
+      "userId": "default-user-id",
+      "tags": [
+        "project-x",
+        "sync",
+        "one_on_one"
+      ],
+      "reminderMinutes": [
+        15,
+        60
+      ],
+      "createdAt": "2026-05-23T18:08:48.371Z",
+      "updatedAt": "2026-05-23T18:08:48.371Z"
+    }
+  ],
+  "attendees": [
+    {
+      "id": "aerpf6s5vxkr0ng1zovpgh",
+      "meetingId": "2n3avvjga7etcm4ve1l3ts",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "6c06m1c323hiyt4ys1b3m",
+      "meetingId": "2n3avvjga7etcm4ve1l3ts",
+      "name": "John Doe",
+      "email": "john@career.ai",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "i24t7aojig8oq8b0g9totd",
+      "meetingId": "i3ziqwb54y3mqm4gaa2rx",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "bw331hhr4aqndvm6tfaiq",
+      "meetingId": "i3ziqwb54y3mqm4gaa2rx",
+      "name": "Sarah Connor",
+      "email": "sarah@skynet.com",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "0sqizniptnvq1gyyrok3s26",
+      "meetingId": "i3ziqwb54y3mqm4gaa2rx",
+      "name": "Alice Vance",
+      "email": "alice@blackmesa.org",
+      "role": "OPTIONAL",
+      "rsvp": "DECLINED"
+    },
+    {
+      "id": "77lxbpjpwysdtbb0bxec5e",
+      "meetingId": "xmhhly15fskyxfnpjskst",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "6h2q6y636s9u9oyygluoa",
+      "meetingId": "xmhhly15fskyxfnpjskst",
+      "name": "Alice Vance",
+      "email": "alice@blackmesa.org",
+      "role": "OPTIONAL",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "4bxj3zc7ko56t1ue5r2i0u",
+      "meetingId": "xmhhly15fskyxfnpjskst",
+      "name": "Bob Vance",
+      "email": "bob@vancerefrigeration.com",
+      "role": "OPTIONAL",
+      "rsvp": "DECLINED"
+    },
+    {
+      "id": "485cu6c7n2elxkzapiz5xq",
+      "meetingId": "xmhhly15fskyxfnpjskst",
+      "name": "Bruce Wayne",
+      "email": "bruce@waynecorp.com",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "7z88zp2yt7hnhncfejz3vc",
+      "meetingId": "v8gq6ue0gjoml1g107avdk",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "uqf7xz1h1ddzw98twihim",
+      "meetingId": "v8gq6ue0gjoml1g107avdk",
+      "name": "Bob Vance",
+      "email": "bob@vancerefrigeration.com",
+      "role": "OPTIONAL",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "pg6aifq89zt8sizzyca4d",
+      "meetingId": "9h0z7fd3j0b1qsl4dg4o5t",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "3xo3rals75i1ud7s38u4bh",
+      "meetingId": "9h0z7fd3j0b1qsl4dg4o5t",
+      "name": "Bruce Wayne",
+      "email": "bruce@waynecorp.com",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "beskq3kpxxpnb0z83bihe",
+      "meetingId": "9h0z7fd3j0b1qsl4dg4o5t",
+      "name": "Peter Parker",
+      "email": "peter@dailybugle.com",
+      "role": "OPTIONAL",
+      "rsvp": "DECLINED"
+    },
+    {
+      "id": "6j3jr4bksit627vj2fayqi",
+      "meetingId": "gst1glnh174afcd2v144i4",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "62q35hc334xch6t27wdpsl",
+      "meetingId": "gst1glnh174afcd2v144i4",
+      "name": "Peter Parker",
+      "email": "peter@dailybugle.com",
+      "role": "OPTIONAL",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "7tfj89lcs5yyhhv1tkscs",
+      "meetingId": "gst1glnh174afcd2v144i4",
+      "name": "Tony Stark",
+      "email": "tony@starkindustries.com",
+      "role": "REQUIRED",
+      "rsvp": "DECLINED"
+    },
+    {
+      "id": "fb6smh93gmrc1av5drokb",
+      "meetingId": "gst1glnh174afcd2v144i4",
+      "name": "John Doe",
+      "email": "john@career.ai",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "4gct4v1iohbi0axptn4yqe",
+      "meetingId": "7e0212jayp4su0u1qm6j8o",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "hgjzr6h412vvnvlg9fd7b",
+      "meetingId": "7e0212jayp4su0u1qm6j8o",
+      "name": "Tony Stark",
+      "email": "tony@starkindustries.com",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "r8t27wxou4qswowdc980yq",
+      "meetingId": "m8ohzdek9bmdwnpq4cowu5",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "b9avba31bhpvvfrxxe2kl",
+      "meetingId": "m8ohzdek9bmdwnpq4cowu5",
+      "name": "John Doe",
+      "email": "john@career.ai",
+      "role": "REQUIRED",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "ennsgu0xqqjsptlqucx6t",
+      "meetingId": "m8ohzdek9bmdwnpq4cowu5",
+      "name": "Sarah Connor",
+      "email": "sarah@skynet.com",
+      "role": "REQUIRED",
+      "rsvp": "DECLINED"
+    },
+    {
+      "id": "r9lrv9rd7gbsnptzv6ts3s",
+      "meetingId": "yw43r6lsf1nvu6lhbz6c7",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "x7r38tqda1bahpoa3k1jg",
+      "meetingId": "yw43r6lsf1nvu6lhbz6c7",
+      "name": "Sarah Connor",
+      "email": "sarah@skynet.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "9oyjof7xbfryst4n7i5vc",
+      "meetingId": "yw43r6lsf1nvu6lhbz6c7",
+      "name": "Alice Vance",
+      "email": "alice@blackmesa.org",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "b6ma46y0wct75ivje0bpna",
+      "meetingId": "yw43r6lsf1nvu6lhbz6c7",
+      "name": "Bob Vance",
+      "email": "bob@vancerefrigeration.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "7u7uqvlzlg9v05qaeoi03d",
+      "meetingId": "hdb9pptk2e99amf3kvause",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "mj5vrcvcyxf0vk15u630g",
+      "meetingId": "hdb9pptk2e99amf3kvause",
+      "name": "Alice Vance",
+      "email": "alice@blackmesa.org",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "x0etrdqppwetm46iyvge",
+      "meetingId": "8gyhjbss1t8qo2re26son",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "6ajgoelhngqqcx5v3qwj7",
+      "meetingId": "8gyhjbss1t8qo2re26son",
+      "name": "Bob Vance",
+      "email": "bob@vancerefrigeration.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "2jm40pha3kjfpm6xl4n10e",
+      "meetingId": "8gyhjbss1t8qo2re26son",
+      "name": "Bruce Wayne",
+      "email": "bruce@waynecorp.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "5nqlvtsmmnve6oqfkia4kf",
+      "meetingId": "ju54xuifo2dwt6tqsy573t",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "rln9y4r6eenzdy1ncw2fc",
+      "meetingId": "ju54xuifo2dwt6tqsy573t",
+      "name": "Bruce Wayne",
+      "email": "bruce@waynecorp.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "8tq73e0cw7mdnrvmritrla",
+      "meetingId": "ju54xuifo2dwt6tqsy573t",
+      "name": "Peter Parker",
+      "email": "peter@dailybugle.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "hrb4x84g1mr5byp1lso42k",
+      "meetingId": "ju54xuifo2dwt6tqsy573t",
+      "name": "Tony Stark",
+      "email": "tony@starkindustries.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "hh7j5ws6hxgz18mwykz4a",
+      "meetingId": "vbv2di1by2dbp6v57z88ar",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "yowv9fpcinlo14p454awgr",
+      "meetingId": "vbv2di1by2dbp6v57z88ar",
+      "name": "Peter Parker",
+      "email": "peter@dailybugle.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "2yabakgnvohd8ln1zhg89",
+      "meetingId": "k33rm3zjs9p7bs5c623g8",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "ibx3s2o0115flyivxnycs",
+      "meetingId": "k33rm3zjs9p7bs5c623g8",
+      "name": "Tony Stark",
+      "email": "tony@starkindustries.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "5fhsv0sf08j7ehss7iexzt",
+      "meetingId": "k33rm3zjs9p7bs5c623g8",
+      "name": "John Doe",
+      "email": "john@career.ai",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "ekgiiaid5ar20a7qcz5qhv",
+      "meetingId": "7nm3kg0two3vunztpofitd",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "tcwj1tkqd3mbk8zcqcehkv",
+      "meetingId": "7nm3kg0two3vunztpofitd",
+      "name": "John Doe",
+      "email": "john@career.ai",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "r00g9qt68sivkn1cjnm0o",
+      "meetingId": "7nm3kg0two3vunztpofitd",
+      "name": "Sarah Connor",
+      "email": "sarah@skynet.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "dzyqwurqk2el2spdg48uh8",
+      "meetingId": "7nm3kg0two3vunztpofitd",
+      "name": "Alice Vance",
+      "email": "alice@blackmesa.org",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "ynlndg7e637n4bc1sbt38",
+      "meetingId": "t4o6htenfchr4nhyacqni",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "5cutzsrg9z8wf3a1rla4zi",
+      "meetingId": "t4o6htenfchr4nhyacqni",
+      "name": "Sarah Connor",
+      "email": "sarah@skynet.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "k10jsg3s04lmtb4oti6gkk",
+      "meetingId": "lopikhh1osev8qn5i6wnxd",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "hduqp3k3nu7y97w2bd054n",
+      "meetingId": "lopikhh1osev8qn5i6wnxd",
+      "name": "Alice Vance",
+      "email": "alice@blackmesa.org",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "hj0nro0equg1zcozyrjgws",
+      "meetingId": "lopikhh1osev8qn5i6wnxd",
+      "name": "Bob Vance",
+      "email": "bob@vancerefrigeration.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "5cypgtszurny7qxva8f4oe",
+      "meetingId": "72j6bzl358weyp6cjcrncs",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "u2z2ex8le6p2ziu5ra09h",
+      "meetingId": "72j6bzl358weyp6cjcrncs",
+      "name": "Bob Vance",
+      "email": "bob@vancerefrigeration.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "wi45ow7j0cbob3zctobnd",
+      "meetingId": "72j6bzl358weyp6cjcrncs",
+      "name": "Bruce Wayne",
+      "email": "bruce@waynecorp.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "xmhu34ik84dknnx9sxky3",
+      "meetingId": "72j6bzl358weyp6cjcrncs",
+      "name": "Peter Parker",
+      "email": "peter@dailybugle.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "eq9ddowvtkydtn64yewe",
+      "meetingId": "27r81tlmapi8w5f1ktas6w",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "nxl9nji3v28wbeoxwsxcp",
+      "meetingId": "27r81tlmapi8w5f1ktas6w",
+      "name": "Bruce Wayne",
+      "email": "bruce@waynecorp.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "xx72scabs8ieu57piwc63m",
+      "meetingId": "aa0faqcvuz20vrp8u89zu",
+      "name": "Admin User",
+      "email": "admin@career.ai",
+      "role": "HOST",
+      "rsvp": "ACCEPTED"
+    },
+    {
+      "id": "heahufss166nc3nqs8vu18",
+      "meetingId": "aa0faqcvuz20vrp8u89zu",
+      "name": "Peter Parker",
+      "email": "peter@dailybugle.com",
+      "role": "OPTIONAL",
+      "rsvp": "PENDING"
+    },
+    {
+      "id": "6v58n9bevw27amc7kdx8hf",
+      "meetingId": "aa0faqcvuz20vrp8u89zu",
+      "name": "Tony Stark",
+      "email": "tony@starkindustries.com",
+      "role": "REQUIRED",
+      "rsvp": "PENDING"
+    }
+  ],
+  "meetingNotes": [],
+  "actionItems": [
+    {
+      "id": "f66sq9rotz7i47u1tw56g",
+      "meetingId": "2n3avvjga7etcm4ve1l3ts",
+      "text": "Prepare agenda slides",
+      "assignee": "John Doe",
+      "dueDate": "2026-05-15T03:30:00.000Z",
+      "done": true
+    },
+    {
+      "id": "jp5ezr2yc510q2akdgwykp",
+      "meetingId": "xmhhly15fskyxfnpjskst",
+      "text": "Follow up with client regarding proposal",
+      "assignee": "Alice Vance",
+      "dueDate": "2026-05-17T05:30:00.000Z",
+      "done": true
+    },
+    {
+      "id": "f27rp35ol6rwzjfaf21q",
+      "meetingId": "9h0z7fd3j0b1qsl4dg4o5t",
+      "text": "Update Jira backlog with sprint points",
+      "assignee": "Bruce Wayne",
+      "dueDate": "2026-05-19T07:30:00.000Z",
+      "done": true
+    },
+    {
+      "id": "pvudj69vhtdrgjvpqt09xs",
+      "meetingId": "7e0212jayp4su0u1qm6j8o",
+      "text": "Send design specs to frontend devs",
+      "assignee": "Tony Stark",
+      "dueDate": "2026-05-21T09:30:00.000Z",
+      "done": true
+    },
+    {
+      "id": "2t02mri8ipl8ob8967gi7r",
+      "meetingId": "yw43r6lsf1nvu6lhbz6c7",
+      "text": "Approve budget spreadsheet",
+      "assignee": "Sarah Connor",
+      "dueDate": "2026-05-25T03:30:00.000Z",
+      "done": false
+    },
+    {
+      "id": "ic7iughwmuyqug0msma9r",
+      "meetingId": "8gyhjbss1t8qo2re26son",
+      "text": "Prepare agenda slides",
+      "assignee": "Bob Vance",
+      "dueDate": "2026-05-26T05:30:00.000Z",
+      "done": false
+    },
+    {
+      "id": "20eqpghjymap5ion1xpca",
+      "meetingId": "vbv2di1by2dbp6v57z88ar",
+      "text": "Follow up with client regarding proposal",
+      "assignee": "Peter Parker",
+      "dueDate": "2026-05-28T07:30:00.000Z",
+      "done": false
+    },
+    {
+      "id": "2xuwih5jzmch6nbah6b9j9",
+      "meetingId": "7nm3kg0two3vunztpofitd",
+      "text": "Update Jira backlog with sprint points",
+      "assignee": "John Doe",
+      "dueDate": "2026-05-30T09:30:00.000Z",
+      "done": false
+    },
+    {
+      "id": "2wgvzgwqcgx88sigcwitsw",
+      "meetingId": "lopikhh1osev8qn5i6wnxd",
+      "text": "Send design specs to frontend devs",
+      "assignee": "Alice Vance",
+      "dueDate": "2026-06-01T03:30:00.000Z",
+      "done": false
+    },
+    {
+      "id": "ekykqm31qd77iz8q5z9d2",
+      "meetingId": "27r81tlmapi8w5f1ktas6w",
+      "text": "Approve budget spreadsheet",
+      "assignee": "Bruce Wayne",
+      "dueDate": "2026-06-03T05:30:00.000Z",
+      "done": false
+    }
+  ]
+}

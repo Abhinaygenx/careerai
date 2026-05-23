@@ -148,6 +148,59 @@ export async function POST(request: NextRequest) {
                     </div>
                 `,
             };
+        } else if (type === 'feedback') {
+            // Feedback form submission
+            const { name, email, insight, rating } = data;
+
+            if (!insight) {
+                return NextResponse.json(
+                    { error: 'Missing insight content' },
+                    { status: 400 }
+                );
+            }
+
+            emailContent = {
+                subject: `[Career.AI Feedback] ${rating} Star Rating from ${name || 'Anonymous'}`,
+                html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                        <div style="background: linear-gradient(135deg, #8b5cf6, #ec4899); padding: 20px; border-radius: 10px 10px 0 0;">
+                            <h1 style="color: white; margin: 0; font-size: 24px;">🗣️ New Feedback Received</h1>
+                        </div>
+                        <div style="background: #1a1a2e; padding: 30px; border-radius: 0 0 10px 10px; color: #e4e4e7;">
+                            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                                <tr>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #333; color: #a1a1aa;">Name:</td>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #333; color: white; font-weight: bold;">${name || 'Anonymous'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #333; color: #a1a1aa;">Email:</td>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #333;">
+                                        ${email ? '<a href="mailto:' + email + '" style="color: #8b5cf6;">' + email + '</a>' : 'Not provided'}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #333; color: #a1a1aa;">Rating:</td>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #333; color: #eab308; font-size: 18px;">
+                                        ${'⭐'.repeat(Number(rating))} (${rating}/5)
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="margin-top: 20px;">
+                                <h3 style="color: #a1a1aa; margin-bottom: 10px;">Insights:</h3>
+                                <div style="background: #0a0a0f; padding: 20px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
+                                    <p style="color: white; margin: 0; line-height: 1.6; white-space: pre-wrap;">${insight}</p>
+                                </div>
+                            </div>
+                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; text-align: center;">
+                                <p style="color: #71717a; font-size: 12px; margin: 0;">
+                                    Sent from Career.AI Feedback Form<br>
+                                    ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+            };
         } else {
             return NextResponse.json(
                 { error: 'Invalid form type' },

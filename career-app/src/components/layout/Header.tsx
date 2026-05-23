@@ -85,6 +85,7 @@ export default function Header() {
                                     </Link>
                                 </div>
                             </div>
+                            <Link href="/internships/calendar" className={styles.navLink}>Internship Calendar</Link>
                             <Link href="/pricing" className={styles.navLink}>Pricing</Link>
                             <Link href="/colleges" className={styles.navLink}>My Colleges</Link>
                             <Link href="/resources" className={styles.navLink}>Resources</Link>
@@ -167,6 +168,10 @@ export default function Header() {
                         </Link>
                         <Link href="/auto-apply" className={styles.mobileNavLink} onClick={closeMobileMenu}>
                             <span>🚀</span> AI Auto Apply
+                        </Link>
+                        <div className={styles.mobileDivider} />
+                        <Link href="/internships/calendar" className={styles.mobileNavLink} onClick={closeMobileMenu}>
+                            <span>📅</span> Internship Calendar
                         </Link>
                         <div className={styles.mobileDivider} />
                         <Link href="/pricing" className={styles.mobileNavLink} onClick={closeMobileMenu}>

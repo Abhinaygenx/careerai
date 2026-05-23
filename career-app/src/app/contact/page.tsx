@@ -18,7 +18,13 @@ export default function ContactPage() {
         suggestion: '',
         priority: 'medium'
     });
-    const [activeTab, setActiveTab] = useState<'contact' | 'suggestion'>('contact');
+    const [feedbackData, setFeedbackData] = useState({
+        name: '',
+        email: '',
+        insight: '',
+        rating: '5'
+    });
+    const [activeTab, setActiveTab] = useState<'contact' | 'suggestion' | 'feedback'>('contact');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -77,6 +83,37 @@ export default function ContactPage() {
             setTimeout(() => {
                 setSubmitted(false);
                 setSuggestionData({ category: 'feature', suggestion: '', priority: 'medium' });
+            }, 4000);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleFeedbackSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'feedback', data: feedbackData }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to submit feedback');
+            }
+
+            setSubmitted(true);
+            // Reset form after 4 seconds
+            setTimeout(() => {
+                setSubmitted(false);
+                setFeedbackData({ name: '', email: '', insight: '', rating: '5' });
             }, 4000);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
@@ -167,6 +204,12 @@ export default function ContactPage() {
                                 >
                                     <span>💡</span> Share Suggestion
                                 </button>
+                                <button
+                                    className={`${styles.tab} ${activeTab === 'feedback' ? styles.activeTab : ''}`}
+                                    onClick={() => setActiveTab('feedback')}
+                                >
+                                    <span>🗣️</span> Share Feedback
+                                </button>
                             </div>
 
                             {error && (
@@ -182,7 +225,9 @@ export default function ContactPage() {
                                     <p>
                                         {activeTab === 'contact'
                                             ? "We've received your message and will get back to you soon!"
-                                            : "Your suggestion has been submitted. We appreciate your feedback!"}
+                                            : activeTab === 'suggestion'
+                                            ? "Your suggestion has been submitted. We appreciate your feedback!"
+                                            : "Thank you for your insights! Your feedback helps us improve."}
                                     </p>
                                 </div>
                             ) : (
@@ -323,6 +368,79 @@ export default function ContactPage() {
                                                     </>
                                                 ) : (
                                                     'Submit Suggestion'
+                                                )}
+                                            </button>
+                                        </form>
+                                    )}
+
+                                    {/* Feedback Form */}
+                                    {activeTab === 'feedback' && (
+                                        <form onSubmit={handleFeedbackSubmit} className={styles.form}>
+                                            <div className={styles.suggestionIntro}>
+                                                <p>🗣️ We value your insights! Tell us about your experience using Career.ai.</p>
+                                            </div>
+
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="feedbackName">Name (Optional)</label>
+                                                <input
+                                                    type="text"
+                                                    id="feedbackName"
+                                                    value={feedbackData.name}
+                                                    onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                                                    placeholder="John Doe"
+                                                />
+                                            </div>
+
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="feedbackEmail">Email (Optional)</label>
+                                                <input
+                                                    type="email"
+                                                    id="feedbackEmail"
+                                                    value={feedbackData.email}
+                                                    onChange={(e) => setFeedbackData({ ...feedbackData, email: e.target.value })}
+                                                    placeholder="john@example.com"
+                                                />
+                                            </div>
+
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="rating">How would you rate your experience?</label>
+                                                <select
+                                                    id="rating"
+                                                    value={feedbackData.rating}
+                                                    onChange={(e) => setFeedbackData({ ...feedbackData, rating: e.target.value })}
+                                                >
+                                                    <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                                                    <option value="4">⭐⭐⭐⭐ (Good)</option>
+                                                    <option value="3">⭐⭐⭐ (Average)</option>
+                                                    <option value="2">⭐⭐ (Fair)</option>
+                                                    <option value="1">⭐ (Poor)</option>
+                                                </select>
+                                            </div>
+
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="insight">Your Insights</label>
+                                                <textarea
+                                                    id="insight"
+                                                    value={feedbackData.insight}
+                                                    onChange={(e) => setFeedbackData({ ...feedbackData, insight: e.target.value })}
+                                                    placeholder="Share your thoughts, insights, and experience with us..."
+                                                    rows={6}
+                                                    required
+                                                />
+                                            </div>
+
+                                            <button
+                                                type="submit"
+                                                className={styles.submitBtn}
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting ? (
+                                                    <>
+                                                        <span className={styles.spinner}></span>
+                                                        Submitting...
+                                                    </>
+                                                ) : (
+                                                    'Submit Feedback'
                                                 )}
                                             </button>
                                         </form>

@@ -879,7 +879,7 @@ const T = {
   amber: "#f59e0b", amberDim: "rgba(245,158,11,0.09)", amberBorder: "rgba(245,158,11,0.28)",
   red: "#ef4444", redDim: "rgba(239,68,68,0.09)", redBorder: "rgba(239,68,68,0.28)",
   purple: "var(--purple)", purpleDim: "rgba(139,92,246,0.09)", purpleBorder: "rgba(139,92,246,0.28)",
-  l1: "#10b981", l2: "var(--blue)", l3: "var(--purple)", l4: "var(--accent)", l5: "#f59e0b",
+  l1: "#10b981", l2: "#4da3ff", l3: "#8b7cf7", l4: "#c4f82a", l5: "#f59e0b",
 };
 
 // Score color using site design
@@ -965,7 +965,18 @@ export default function ATSv6() {
       .ats-editor-grid { display: grid; grid-template-columns: 1fr 260px; gap: 14px; }
       .ats-kw-grid     { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
       .ats-li-grid     { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-      .ats-layer-cards { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-bottom: 32px; }
+      .ats-layer-cards { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 32px; }
+      .ats-layer-card {
+        transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        border-top: 2px solid var(--card-col) !important;
+        position: relative;
+        cursor: default;
+      }
+      .ats-layer-card:hover {
+        transform: translateY(-4px);
+        border-top-width: 4px !important;
+        box-shadow: 0 12px 24px -10px var(--card-col-glow), 0 4px 12px -5px rgba(0, 0, 0, 0.15);
+      }
       .ats-platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
       .ats-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
       .ats-tabs::-webkit-scrollbar { display: none; }
@@ -1092,16 +1103,41 @@ export default function ATSv6() {
         {/* Layer overview cards */}
         <div className="ats-layer-cards">
           {[
-            { l:"L1", name:"Structure", pts:"30pts", col:T.l1, items:["XML table detection","Section presence","Date coverage","Education completeness","Contact fields"] },
-            { l:"L2", name:"Content",   pts:"25pts", col:T.l2, items:["Action verb density","Passive voice penalty","Quantification","Bullet structure","Resume length"] },
-            { l:"L3", name:"Keywords",  pts:"20pts", col:T.l3, items:["14 industry taxonomies","O*NET-aligned terms","TF-IDF cosine JD","Bonus keyword tracking","Industry detection"] },
-            { l:"L4", name:"AI Writing",pts:"15pts", col:T.l4, items:["Bullet impact quality","Narrative clarity","Tone/voice match","Specificity check","Before/after rewrites"] },
-            { l:"L5", name:"Format",    pts:"10pts", col:T.l5, items:["Table removal","Multi-column detect","Unicode cleanup","Page structure","File format signal"] },
-          ].map(({ l, name, pts, col, items }) => (
-            <div key={l} style={{ ...card(), borderTop:`2px solid ${col}`, padding:"12px 14px" }}>
-              <div style={{ fontFamily:"var(--font-mono)", fontSize:9, color:col, marginBottom:2 }}>{l} — {name}</div>
-              <div style={{ fontWeight:700, fontSize:22, color:col, marginBottom:8 }}>{pts}</div>
-              {items.map(it => <div key={it} style={{ fontSize:10, color:T.muted, lineHeight:1.8, display:"flex", gap:4 }}><span style={{ color:col, flexShrink:0 }}>›</span>{it}</div>)}
+            { l:"L1", name:"Structure", pts:"30pts", col:T.l1, desc:"Validates contact fields, section presence, header hierarchy, and date format completeness." },
+            { l:"L2", name:"Content",   pts:"25pts", col:T.l2, desc:"Evaluates action verb density, passive voice penalties, bullet structure, and quantification." },
+            { l:"L3", name:"Keywords",  pts:"20pts", col:T.l3, desc:"Scans for O*NET-aligned industry taxonomies and performs job description cosine similarity math." },
+            { l:"L4", name:"AI Writing",pts:"15pts", col:T.l4, desc:"Checks tone consistency, narrative flow, readability, specificity, and phrasing impact." },
+            { l:"L5", name:"Format",    pts:"10pts", col:T.l5, desc:"Detects parsing blockers like tables, columns, bad character encodings, and layout barriers." },
+          ].map(({ l, name, pts, col, desc }) => (
+            <div
+              key={l}
+              className="ats-layer-card"
+              style={{
+                ...card(),
+                borderTop: `2px solid var(--card-col)`,
+                padding: "16px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                '--card-col': col,
+                '--card-col-glow': col + "38", // 22% opacity for subtle glow
+              } as React.CSSProperties}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 600, color: col, letterSpacing: "0.5px" }}>{l}</span>
+                <span style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  fontFamily: "var(--font-mono)",
+                  color: col,
+                  background: `${col}15`,
+                  padding: "2px 8px",
+                  borderRadius: 12,
+                  border: `1px solid ${col}25`
+                }}>{pts}</span>
+              </div>
+              <div style={{ fontWeight: 600, fontSize: 14, color: "var(--text-primary)", letterSpacing: "-0.2px" }}>{name}</div>
+              <div style={{ fontSize: 11.5, color: T.muted, lineHeight: 1.5, fontWeight: 400 }}>{desc}</div>
             </div>
           ))}
         </div>

@@ -481,8 +481,12 @@ export default function CalendarClient({ initialInternships, initialMonth, isInd
         {/* Page Header */}
         <div className={styles.headerContainer}>
           <div className={styles.headerTextGroup}>
+            <div className={styles.headerBadge}>
+              <span className={styles.headerBadgeDot}></span>
+              <span>Real-Time Internship Sync</span>
+            </div>
             <h1 className={styles.title}>
-              Internship <span className="text-gradient">Calendar</span>
+              Internship <span className={styles.titleSpan}>Calendar</span>
             </h1>
             <p className={styles.subtitle}>
               Track deadlines, organize upcoming applications, and sync directly to your Google Calendar.

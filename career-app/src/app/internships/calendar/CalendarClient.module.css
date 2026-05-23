@@ -8,10 +8,10 @@
     font-family: var(--font-display);
     font-size: clamp(32px, 4vw, 42px);
     font-weight: 500;
-    line-height: 1.1;
+    line-height: 1.25; /* Adjusted from 1.1 to fix vertical text orientation */
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* Increased spacing between title and subtitle */
 }
 
 .subtitle {
@@ -1105,6 +1105,138 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+/* ============================================
+   PAGE HEADER LAYOUT & CONNECT BUTTON ALIGNMENT FIXES
+   ============================================ */
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+}
+
+@media (max-width: 768px) {
+    .headerContainer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 18px;
+    }
+}
+
+.headerTextGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .headerActions {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* Connect Calendar Button with precise vertical centering */
+.connectBtn {
+    background: var(--accent);
+    color: var(--primary);
+    padding: 11px 24px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 14px var(--accent-glow);
+    user-select: none;
+    line-height: 1;
+}
+
+.connectBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.connectBtn:active {
+    transform: translateY(0);
+}
+
+/* Precise alignment offsets for text and icon inside button */
+.connectBtnText {
+    position: relative;
+    top: 1px; /* Baseline adjustment to counteract font rendering offset */
+}
+
+.connectBtnIcon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    position: relative;
+    top: -0.5px; /* Visual center correction for icon */
+}
+
+/* Connected Badge */
+.connectedBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #10b981;
+    line-height: 1;
+}
+
+.connectedBadgeDot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.disconnectBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: color var(--transition-fast);
+}
+
+.disconnectBtn:hover {
+    color: #f43f5e;
 }
 
 

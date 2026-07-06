@@ -34,7 +34,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
   return (
     <div className="w-full flex flex-col gap-4 select-none">
       {dayKeys.length === 0 ? (
-        <div className="bg-[#161616] border border-[#2D2D2D] rounded-xl p-12 text-center text-gray-500 flex flex-col items-center gap-2">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-12 text-center text-[var(--text-muted)] flex flex-col items-center gap-2 shadow-sm">
           <span className="text-3xl">📅</span>
           <span className="text-sm">No upcoming meetings in your agenda. Add a meeting to get started!</span>
         </div>
@@ -47,12 +47,12 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
             return (
               <div key={key} className="flex flex-col gap-2">
                 {/* Date header label */}
-                <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 pl-1">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] pl-1">
                   {dateLabel}
                 </h4>
 
                 {/* Day meetings container */}
-                <div className="flex flex-col bg-[#161616] border border-[#2D2D2D] rounded-xl divide-y divide-[#2D2D2D] overflow-hidden">
+                <div className="flex flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl divide-y divide-[var(--border)] overflow-hidden shadow-sm">
                   {group.items.map(m => {
                     const start = new Date(m.startTime);
                     const end = new Date(m.endTime);
@@ -60,14 +60,14 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                     return (
                       <div
                         key={m.occurrenceId || m.id}
-                        className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#1a1a1a] transition-colors"
+                        className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[var(--surface-hover)] transition-colors"
                       >
                         {/* Time block */}
                         <div className="flex flex-col gap-1 sm:w-36 flex-shrink-0">
-                          <span className="text-sm font-bold text-gray-200 font-mono">
+                          <span className="text-sm font-bold text-[var(--text-primary)] font-mono">
                             {format(start, 'h:mm a')}
                           </span>
-                          <span className="text-xs text-gray-500 font-mono">
+                          <span className="text-xs text-[var(--text-muted)] font-mono">
                             {format(end, 'h:mm a')}
                           </span>
                         </div>
@@ -75,7 +75,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                         {/* Title / Badge */}
                         <div className="flex-1 flex flex-col gap-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <h5 className="text-sm font-semibold text-white truncate" title={m.title}>
+                            <h5 className="text-sm font-semibold text-[var(--text-primary)] truncate" title={m.title}>
                               {m.title}
                             </h5>
                             <span
@@ -86,7 +86,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                             </span>
                           </div>
                           {m.description && (
-                            <p className="text-xs text-gray-400 truncate max-w-xl">
+                            <p className="text-xs text-[var(--text-secondary)] truncate max-w-xl">
                               {m.description}
                             </p>
                           )}
@@ -106,7 +106,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                               return (
                                 <div
                                   key={a.id}
-                                  className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#262626] border-2 border-[#161616] text-[10px] font-bold text-gray-300"
+                                  className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[var(--background-secondary)] border-2 border-[var(--surface)] text-[10px] font-bold text-[var(--text-secondary)]"
                                   title={`${a.name} (${a.email})`}
                                 >
                                   {initials}
@@ -114,7 +114,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                               );
                             })}
                             {m.attendees.length > 4 && (
-                              <div className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-purple-950 border-2 border-[#161616] text-[9px] font-bold text-purple-300">
+                              <div className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[var(--purple)]/20 border-2 border-[var(--surface)] text-[9px] font-bold text-[var(--purple)]">
                                 +{m.attendees.length - 4}
                               </div>
                             )}
@@ -128,7 +128,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                               href={m.meetLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-2.5 py-1.5 bg-[#8B7CF7] hover:bg-[#9c8ff8] text-[#0F0F0F] rounded text-xs font-bold transition-colors"
+                              className="px-2.5 py-1.5 bg-[var(--purple)] hover:bg-[var(--purple)]/90 text-[var(--text-inverse)] rounded text-xs font-bold transition-colors"
                               title="Join Video Room"
                             >
                               Join
@@ -137,7 +137,7 @@ export default function AgendaView({ meetings, onEditMeeting }: AgendaViewProps)
                           <IcsDownloadButton meetingId={m.id} />
                           <button
                             onClick={() => onEditMeeting(m)}
-                            className="px-2.5 py-1.5 bg-[#262626] hover:bg-[#363636] border border-white/5 text-gray-300 hover:text-white rounded text-xs font-semibold cursor-pointer transition-colors"
+                            className="px-2.5 py-1.5 bg-[var(--surface)] hover:bg-[var(--surface-hover)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded text-xs font-semibold cursor-pointer transition-colors"
                           >
                             Edit
                           </button>

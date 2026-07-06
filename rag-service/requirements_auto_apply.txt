@@ -1,0 +1,23 @@
+# Auto Apply Service Dependencies
+# Install with: pip install -r requirements_auto_apply.txt
+
+# Core framework
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-dotenv==1.0.1
+pydantic==2.9.2
+
+# SpeedyApply's JobSpy - multi-platform job scraper
+python-jobspy==1.1.80
+
+# Data processing
+pandas==2.2.3
+
+# AI providers
+groq==0.11.0
+
+# HTTP client for URL enrichment
+aiohttp==3.11.8
+
+# Async utilities
+anyio==4.6.2

@@ -94,7 +94,7 @@ function DroppableDayColumn({ day, dateStr, children }: { day: Date; dateStr: st
   return (
     <div
       ref={setNodeRef}
-      className="relative border-r border-[#2D2D2D] h-full"
+      className="relative border-r border-[var(--border)] h-full"
       style={{ minWidth: '120px' }}
     >
       {children}
@@ -198,11 +198,11 @@ export default function WeekView({
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <div className="w-full flex flex-col bg-[#161616] border border-[#2D2D2D] rounded-xl overflow-x-auto select-none">
+      <div className="w-full flex flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-x-auto select-none">
         {/* Header Row */}
-        <div className="flex border-b border-[#2D2D2D]">
+        <div className="flex border-b border-[var(--border)] bg-[var(--surface-secondary)]">
           {/* Time axis header block */}
-          <div className="w-16 flex-shrink-0 border-r border-[#2D2D2D]" />
+          <div className="w-16 flex-shrink-0 border-r border-[var(--border)]" />
           
           {/* Days headers */}
           <div className="grid grid-cols-7 flex-1 min-w-[840px]">
@@ -211,18 +211,18 @@ export default function WeekView({
               return (
                 <div
                   key={day.toString()}
-                  className={`py-3 text-center border-r border-[#2D2D2D] last:border-0 flex flex-col items-center justify-center gap-1 ${
-                    activeDay ? 'bg-purple-900/10' : ''
+                  className={`py-3 text-center border-r border-[var(--border)] last:border-0 flex flex-col items-center justify-center gap-1 ${
+                    activeDay ? 'bg-[var(--purple)]/10' : ''
                   }`}
                 >
-                  <span className="text-[10px] uppercase font-bold text-gray-400">
+                  <span className="text-[10px] uppercase font-bold text-[var(--text-muted)]">
                     {format(day, 'EEE')}
                   </span>
                   <span
                     className={`text-sm font-semibold w-7 h-7 flex items-center justify-center rounded-full ${
                       activeDay
-                        ? 'bg-[#8B7CF7] text-[#0F0F0F] font-bold shadow-md shadow-[#8B7CF7]/25'
-                        : 'text-gray-200'
+                        ? 'bg-[var(--purple)] text-[var(--text-inverse)] font-bold shadow-md shadow-[var(--purple)]/25'
+                        : 'text-[var(--text-secondary)]'
                     }`}
                   >
                     {format(day, 'd')}
@@ -236,11 +236,11 @@ export default function WeekView({
         {/* Scrollable hourly grid */}
         <div className="flex flex-1 relative min-w-[900px]" style={{ height: `${HOURS.length * ROW_HEIGHT}px` }}>
           {/* Hourly scale column */}
-          <div className="w-16 flex-shrink-0 bg-[#161616] border-r border-[#2D2D2D] relative z-20">
+          <div className="w-16 flex-shrink-0 bg-[var(--surface-secondary)] border-r border-[var(--border)] relative z-20">
             {HOURS.map((hour, idx) => (
               <div
                 key={hour}
-                className="absolute text-[10px] font-mono text-gray-400 font-medium w-full text-right pr-2 select-none"
+                className="absolute text-[10px] font-mono text-[var(--text-muted)] font-medium w-full text-right pr-2 select-none"
                 style={{ top: `${idx * ROW_HEIGHT - 6}px` }}
               >
                 {format(new Date().setHours(hour, 0), 'h a')}
@@ -253,7 +253,7 @@ export default function WeekView({
             {HOURS.map((_, idx) => (
               <div
                 key={idx}
-                className="border-b border-[#2D2D2D] w-full absolute"
+                className="border-b border-[var(--border)] w-full absolute"
                 style={{ top: `${idx * ROW_HEIGHT}px` }}
               />
             ))}
@@ -273,7 +273,7 @@ export default function WeekView({
                     <div
                       key={hour}
                       onClick={() => onSelectTimeSlot(day, hour)}
-                      className="absolute left-0 right-0 hover:bg-purple-900/10 cursor-pointer"
+                      className="absolute left-0 right-0 hover:bg-[var(--purple)]/10 cursor-pointer"
                       style={{
                         top: `${idx * ROW_HEIGHT}px`,
                         height: `${ROW_HEIGHT}px`,

@@ -41,13 +41,13 @@ export default function CalendarGrid({
   };
 
   return (
-    <div className="w-full flex flex-col select-none">
+    <div className="w-full flex flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm select-none">
       {/* Week Header */}
-      <div className="grid grid-cols-7 border-b border-[#2D2D2D] bg-[#161616]">
+      <div className="grid grid-cols-7 border-b border-[var(--border)] bg-[var(--surface-secondary)]">
         {weekDays.map(wd => (
           <div
             key={wd}
-            className="py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-400"
+            className="py-3 text-center text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]"
           >
             {wd}
           </div>
@@ -55,7 +55,7 @@ export default function CalendarGrid({
       </div>
 
       {/* Grid Days */}
-      <div className="grid grid-cols-7 grid-rows-5 bg-[#2D2D2D] gap-[1px] overflow-hidden border border-[#2D2D2D] rounded-b-xl">
+      <div className="grid grid-cols-7 grid-rows-5 bg-[var(--border)] gap-[1px] overflow-hidden">
         {days.map((day, idx) => {
           const dayMeetings = getDayMeetings(day);
           const isCurrentMonth = isSameMonth(day, currentDate);
@@ -67,18 +67,18 @@ export default function CalendarGrid({
           return (
             <div
               key={day.toString()}
-              className={`min-h-[120px] bg-[#161616] p-2 flex flex-col gap-1.5 transition-colors relative hover:bg-[#1a1a1a] ${
+              className={`min-h-[120px] bg-[var(--surface)] p-2 flex flex-col gap-1.5 transition-colors relative hover:bg-[var(--surface-hover)] ${
                 !isCurrentMonth ? 'opacity-40' : ''
               }`}
             >
               {/* Day Number Row */}
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center relative z-10">
                 <span
                   onClick={() => onSelectDay(day)}
                   className={`text-xs font-semibold cursor-pointer w-6 h-6 flex items-center justify-center rounded-full hover:bg-purple-900/40 hover:text-purple-300 ${
                     isCurrentDay
-                      ? 'bg-[#8B7CF7] text-[#0F0F0F] font-bold shadow-md shadow-[#8B7CF7]/25'
-                      : 'text-gray-300'
+                      ? 'bg-[var(--purple)] text-[var(--text-inverse)] font-bold shadow-md shadow-[var(--purple)]/25'
+                      : 'text-[var(--text-secondary)]'
                   }`}
                 >
                   {format(day, 'd')}
@@ -86,12 +86,12 @@ export default function CalendarGrid({
 
                 {/* Dot Indicator */}
                 {hasMeetings && !isCurrentDay && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8B7CF7] animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--purple)] animate-pulse" />
                 )}
               </div>
 
               {/* Meeting Chips */}
-              <div className="flex flex-col gap-1 overflow-y-auto flex-1 max-h-[85px] no-scrollbar">
+              <div className="flex flex-col gap-1 overflow-y-auto flex-1 max-h-[85px] no-scrollbar relative z-10">
                 {displayMeetings.map(m => (
                   <MeetingChip
                     key={m.occurrenceId || m.id}
@@ -110,7 +110,7 @@ export default function CalendarGrid({
                       e.stopPropagation();
                       setActivePopoverDay(activePopoverDay && isSameDay(activePopoverDay, day) ? null : day);
                     }}
-                    className="text-[10px] font-bold text-left px-1.5 py-0.5 text-[#8B7CF7] hover:underline cursor-pointer"
+                    className="text-[10px] font-bold text-left px-1.5 py-0.5 text-[var(--purple)] hover:underline cursor-pointer"
                   >
                     + {extraCount} more
                   </button>
@@ -125,9 +125,9 @@ export default function CalendarGrid({
 
               {/* Popover for "+N more" */}
               {activePopoverDay && isSameDay(activePopoverDay, day) && (
-                <div className="absolute top-10 left-1 right-1 z-30 bg-[#1e1e1e] border border-[#2D2D2D] rounded-lg shadow-xl p-2 max-h-[200px] overflow-y-auto flex flex-col gap-1">
-                  <div className="flex justify-between items-center mb-1 pb-1 border-b border-[#2D2D2D]">
-                    <span className="text-[10px] font-bold uppercase text-gray-400">
+                <div className="absolute top-10 left-1 right-1 z-30 bg-[var(--surface-secondary)] border border-[var(--border)] rounded-lg shadow-xl p-2 max-h-[200px] overflow-y-auto flex flex-col gap-1">
+                  <div className="flex justify-between items-center mb-1 pb-1 border-b border-[var(--border)]">
+                    <span className="text-[10px] font-bold uppercase text-[var(--text-muted)]">
                       {format(day, 'MMM d, yyyy')}
                     </span>
                     <button

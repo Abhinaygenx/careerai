@@ -24,18 +24,18 @@ export default function ActionItemList({ actionItems, onToggleActionItem }: Acti
   const pendingItems = actionItems.filter(ai => !ai.done);
 
   return (
-    <div className="w-full bg-[#161616] border border-[#2D2D2D] rounded-xl p-4 flex flex-col gap-3 select-none">
-      <div className="flex justify-between items-center pb-2 border-b border-[#2D2D2D]">
-        <h4 className="text-xs font-bold text-gray-200 uppercase tracking-wider">
+    <div className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4 flex flex-col gap-3 select-none shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex justify-between items-center pb-2 border-b border-[var(--border)]">
+        <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">
           📋 Action Items Tracker
         </h4>
-        <span className="text-[10px] font-semibold font-mono bg-purple-950 text-purple-300 border border-purple-800/40 px-2 py-0.5 rounded">
+        <span className="text-[10px] font-semibold font-mono bg-[var(--purple)]/10 text-[var(--purple)] border border-[var(--purple)]/20 px-2 py-0.5 rounded">
           {pendingItems.length} Pending
         </span>
       </div>
 
       {pendingItems.length === 0 ? (
-        <div className="text-center py-6 text-xs text-gray-500">
+        <div className="text-center py-6 text-xs text-[var(--text-muted)]">
           🎉 All caught up! No pending action items.
         </div>
       ) : (
@@ -47,25 +47,25 @@ export default function ActionItemList({ actionItems, onToggleActionItem }: Acti
             return (
               <div
                 key={item.id}
-                className="flex items-start gap-2.5 p-2 rounded bg-[#1e1e1e]/60 border border-white/5 hover:border-white/10 transition-all"
+                className="flex items-start gap-2.5 p-2 rounded bg-[var(--background-secondary)] border border-[var(--border-light)] hover:border-[var(--border)] transition-all"
               >
                 <input
                   type="checkbox"
                   checked={item.done}
                   onChange={(e) => onToggleActionItem(item.meetingId, item.id, e.target.checked)}
-                  className="mt-0.5 accent-[#8B7CF7] cursor-pointer"
+                  className="mt-0.5 accent-[var(--purple)] cursor-pointer"
                 />
                 
                 <div className="flex-1 flex flex-col min-w-0">
-                  <span className="text-xs font-medium text-gray-200 leading-tight">
+                  <span className="text-xs font-semibold text-[var(--text-primary)] leading-tight">
                     {item.text}
                   </span>
                   
                   {/* Metadata line */}
-                  <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[9px] text-gray-500 font-mono">
-                    <span>Owner: <strong className="text-gray-400">{item.assignee}</strong></span>
+                  <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[9px] text-[var(--text-muted)] font-mono">
+                    <span>Owner: <strong className="text-[var(--text-secondary)]">{item.assignee}</strong></span>
                     <span>•</span>
-                    <span className={isOverdue ? 'text-red-400 font-bold' : ''}>
+                    <span className={isOverdue ? 'text-red-500 font-bold' : ''}>
                       Due: {format(dueDate, 'MMM d')} {isOverdue ? '(Overdue)' : ''}
                     </span>
                     {item.meeting && (

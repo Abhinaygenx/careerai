@@ -13,7 +13,10 @@ import AgendaView from '@/components/meetings/AgendaView';
 import MeetingForm from '@/components/meetings/MeetingForm';
 import ActionItemList from '@/components/meetings/ActionItemList';
 import FocusTimeGuard from '@/components/meetings/FocusTimeGuard';
+import MeetingHealthScore from '@/components/meetings/MeetingHealthScore';
 import { detectRecurringSuggestions } from '@/lib/meetingsClientUtils';
+import styles from '../page.module.css';
+import localStyles from './meetings.module.css';
 
 export default function MeetingsDashboardPage() {
   const router = useRouter();
@@ -34,6 +37,16 @@ export default function MeetingsDashboardPage() {
   const [formDefaultHour, setFormDefaultHour] = useState<number | undefined>(undefined);
   
   const [dataLoading, setDataLoading] = useState(true);
+  
+  // Notification states
+  const [toasts, setToasts] = useState<Array<{ id: string; title: string; message: string; type: 'info' | 'warning' }>>([]);
+
+  const addInAppToast = useCallback((toast: { id: string; title: string; message: string; type: 'info' | 'warning' }) => {
+    setToasts(prev => [...prev, toast]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== toast.id));
+    }, 6000);
+  }, []);
 
   // Auth Protection Check
   useEffect(() => {
@@ -41,6 +54,86 @@ export default function MeetingsDashboardPage() {
       router.push('/login');
     }
   }, [user, loading, router]);
+
+  // Push Notifications and In-App Notifications check
+  useEffect(() => {
+    if (!meetings || meetings.length === 0) return;
+    
+    // Request permission if not granted
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      if (Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+    }
+
+    const checkMeetingsForNotifications = () => {
+      const now = new Date();
+      
+      meetings.forEach(meeting => {
+        const meetingStart = new Date(meeting.startTime);
+        const diffMinutes = Math.round((meetingStart.getTime() - now.getTime()) / (60 * 1000));
+        
+        // Read reminder preference or default to 15 min and 5 min
+        const reminderTimes = meeting.reminderMinutes || [15];
+        
+        reminderTimes.forEach((reminderOffset: number) => {
+          const notificationId = `${meeting.id}_${reminderOffset}`;
+          
+          if (diffMinutes === reminderOffset && diffMinutes > 0) {
+            const notifiedKey = `notified_${notificationId}`;
+            const alreadyNotified = sessionStorage.getItem(notifiedKey);
+            
+            if (!alreadyNotified) {
+              sessionStorage.setItem(notifiedKey, 'true');
+              
+              // Trigger Native Browser notification
+              if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+                new Notification(`Upcoming Meeting: ${meeting.title}`, {
+                  body: `Starting in ${reminderOffset} minutes (${format(meetingStart, 'hh:mm a')})`,
+                });
+              }
+              
+              // Trigger In-App Notification
+              addInAppToast({
+                id: notificationId,
+                title: meeting.title,
+                message: `Starts in ${reminderOffset} minutes (${format(meetingStart, 'hh:mm a')})`,
+                type: 'warning'
+              });
+            }
+          }
+        });
+        
+        // Trigger exactly at start time
+        const startNotificationId = `${meeting.id}_start`;
+        if (diffMinutes === 0) {
+          const notifiedKey = `notified_${startNotificationId}`;
+          const alreadyNotified = sessionStorage.getItem(notifiedKey);
+          
+          if (!alreadyNotified) {
+            sessionStorage.setItem(notifiedKey, 'true');
+            
+            if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+              new Notification(`Meeting Starting Now: ${meeting.title}`, {
+                body: `Click to join or view notes.`,
+              });
+            }
+            
+            addInAppToast({
+              id: startNotificationId,
+              title: meeting.title,
+              message: `Starting now!`,
+              type: 'info'
+            });
+          }
+        }
+      });
+    };
+
+    checkMeetingsForNotifications();
+    const interval = setInterval(checkMeetingsForNotifications, 10000); // Check every 10 seconds
+    return () => clearInterval(interval);
+  }, [meetings, addInAppToast]);
 
   // Fetch all meeting details
   const fetchMeetingData = useCallback(async () => {
@@ -250,87 +343,103 @@ export default function MeetingsDashboardPage() {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen bg-[#0F0F0F] text-white flex flex-col items-center justify-center font-sans gap-3">
-        <div className="w-8 h-8 border-3 border-purple-950 border-t-purple-400 rounded-full animate-spin" />
-        <p className="text-gray-400 text-sm">Loading your workspace...</p>
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <p>Loading your career workspace...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F] text-white flex font-sans">
+    <div className={styles.dashboard}>
       {/* Sidebar navigation */}
-      <aside className="w-64 border-r border-[#2D2D2D] bg-[#161616] p-6 hidden md:flex flex-col justify-between select-none">
+      <aside className={styles.sidebar}>
         <div className="flex flex-col gap-6">
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight">
-            <span>🎯</span>
-            <span>Career<span className="text-[#C4F82A]">.ai</span></span>
+          <Link href="/" className={styles.logo}>
+            <span className={styles.logoIcon}>🎯</span>
+            <span>Career<span className={styles.logoAi}>.ai</span></span>
           </Link>
 
-          <nav className="flex flex-col gap-1">
-            <Link href="/dashboard" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-              <span>📊</span> Dashboard Overview
+          <nav className={styles.nav}>
+            <Link href="/dashboard" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9" /><rect x="14" y="3" width="7" height="5" /><rect x="14" y="12" width="7" height="9" /><rect x="3" y="16" width="7" height="5" /></svg>
+              <span>Overview</span>
             </Link>
             
-            <div className="h-[1px] bg-[#2D2D2D] my-2" />
+            <Link href="/dashboard" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
+              <span>My Resumes</span>
+            </Link>
 
-            <Link href="/ats-checker" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-              <span>🎯</span> ATS Checker
+            <Link href="/dashboard" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
+              <span>Applications</span>
             </Link>
-            <Link href="/resume-builder" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-              <span>📝</span> Resume Builder
+
+            <div className={styles.navDivider} />
+
+            <Link href="/ats-checker" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>
+              <span>ATS Checker</span>
             </Link>
-            <Link href="/cover-letter" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-              <span>✉️</span> Cover Letters
+            <Link href="/resume-builder" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
+              <span>Resume Builder</span>
             </Link>
-            <Link href="/mock-interview" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-              <span>🎤</span> Mock Interviews
+            <Link href="/cover-letter" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+              <span>Cover Letters</span>
             </Link>
-            <Link href="/auto-apply" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-              <span>🚀</span> Auto Apply
+            <Link href="/mock-interview" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v1a7 7 0 0 1-14 0v-1" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" /></svg>
+              <span>Mock Interviews</span>
             </Link>
-            <Link href="/dashboard/meetings" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-purple-950/20 border border-purple-800/40 text-purple-300 font-medium">
-              <span>📅</span> Meeting Tracker
+            <Link href="/auto-apply" className={styles.navItem}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
+              <span>Auto Apply</span>
+            </Link>
+            <Link href="/dashboard/meetings" className={`${styles.navItem} ${styles.active}`}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--purple)]"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+              <span>Meeting Tracker</span>
             </Link>
           </nav>
         </div>
 
-        <Link href="/pricing" className="py-2.5 text-center bg-[#C4F82A] text-black font-bold rounded-lg text-xs hover:bg-[#aee61f] transition-all">
-          ⚡ Upgrade to Pro
-        </Link>
+        <div className={styles.sidebarFooter}>
+          <div className={styles.upgradeCard}>
+            <h4 className={styles.upgradeTitle}>Upgrade to Pro</h4>
+            <p className={styles.upgradeText}>Get unlimited ATS scans, mock interviews & advanced resume reviews.</p>
+            <Link href="/pricing" className={styles.upgradeBtn}>
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
+              Upgrade Now
+            </Link>
+          </div>
+        </div>
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col min-h-screen">
+      <main className={styles.main}>
         {/* Header */}
-        <header className="border-b border-[#2D2D2D] px-6 py-4 flex justify-between items-center bg-[#161616]">
+        <header className={styles.header}>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold text-white leading-none">Smart Meeting Calendar</h1>
+            <h1 className={styles.pageTitle}>Smart Meeting Calendar</h1>
             <Link 
               href="/dashboard/meetings/analytics" 
-              className="text-xs font-semibold px-2.5 py-1 rounded bg-[#2D2D2D] text-gray-300 hover:text-white hover:bg-[#3D3D3D] transition-colors"
+              className="text-xs font-semibold px-2.5 py-1.5 rounded bg-[var(--background-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] border border-[var(--border)] transition-colors"
             >
               📈 View Analytics
             </Link>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-1 bg-[#262626] rounded-lg p-1 border border-white/5 text-xs text-gray-400">
-              <button onClick={() => setView('month')} className={`px-3 py-1 rounded-md cursor-pointer transition-colors ${view === 'month' ? 'bg-[#8B7CF7] text-black font-bold' : 'hover:text-white'}`}>Month</button>
-              <button onClick={() => setView('week')} className={`px-3 py-1 rounded-md cursor-pointer transition-colors ${view === 'week' ? 'bg-[#8B7CF7] text-black font-bold' : 'hover:text-white'}`}>Week</button>
-              <button onClick={() => setView('day')} className={`px-3 py-1 rounded-md cursor-pointer transition-colors ${view === 'day' ? 'bg-[#8B7CF7] text-black font-bold' : 'hover:text-white'}`}>Day</button>
-              <button onClick={() => setView('agenda')} className={`px-3 py-1 rounded-md cursor-pointer transition-colors ${view === 'agenda' ? 'bg-[#8B7CF7] text-black font-bold' : 'hover:text-white'}`}>Agenda</button>
-            </div>
-            
-            <div className="text-xs text-gray-400 font-mono hidden md:block">
-              Shortcuts: <kbd className="bg-[#262626] px-1 py-0.5 rounded text-white font-bold">M</kbd> <kbd className="bg-[#262626] px-1 py-0.5 rounded text-white font-bold">W</kbd> <kbd className="bg-[#262626] px-1 py-0.5 rounded text-white font-bold">D</kbd> <kbd className="bg-[#262626] px-1 py-0.5 rounded text-white font-bold">A</kbd>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="w-8 h-8 rounded-full bg-purple-950 text-purple-300 font-bold flex items-center justify-center text-sm border border-purple-800">
-                {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
-              </span>
-              <button onClick={handleLogout} className="text-xs px-2.5 py-1.5 border border-[#2D2D2D] rounded hover:bg-white/5 transition-colors cursor-pointer text-gray-300 hover:text-white">
+          <div className={styles.headerRight}>
+            <div className={styles.userMenu}>
+              <Link href="/profile" className={styles.userProfileLink}>
+                <span className={styles.avatar}>
+                  {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
+                </span>
+                <span className={styles.userName}>{user.displayName || user.email?.split('@')[0] || 'User'}</span>
+              </Link>
+              <button onClick={handleLogout} className={styles.logoutBtn}>
                 Logout
               </button>
             </div>
@@ -338,191 +447,203 @@ export default function MeetingsDashboardPage() {
         </header>
 
         {/* Content */}
-        <div className="p-6 flex flex-col xl:flex-row gap-6 items-start flex-grow">
-          {/* Left Block: The Main Calendar View */}
-          <div className="flex-1 w-full flex flex-col gap-4">
-            
-            {/* suggestions banner */}
-            {suggestions.length > 0 && (
-              <div className="p-3 bg-purple-950/20 border border-purple-800/40 text-purple-300 rounded-lg text-xs flex justify-between items-center select-none animate-pulse">
-                <div className="flex items-center gap-2">
-                  <span>💡</span>
-                  <span>{suggestions[0].message}</span>
-                </div>
-                <button
-                  onClick={() => {
-                    setFormDefaultDate(new Date());
-                    setFormDefaultHour(10);
-                    setSelectedMeeting({
-                      title: `Recurring Sync w/ ${suggestions[0].attendeeName}`,
-                      attendees: [
-                        { name: suggestions[0].attendeeName, email: suggestions[0].attendeeEmail, role: 'REQUIRED' }
-                      ],
-                      recurrence: 'WEEKLY',
-                    });
-                    setIsFormOpen(true);
-                  }}
-                  className="px-2.5 py-1 bg-[#8B7CF7] text-black font-bold rounded text-[10px] hover:bg-[#a094f9] transition-colors cursor-pointer"
-                >
-                  Create Series
-                </button>
-              </div>
-            )}
-
-            {/* Navigation and Date Display */}
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <h2 className="text-lg font-bold text-gray-200">
-                  {view === 'month' && format(currentDate, 'MMMM yyyy')}
-                  {view === 'week' && `Week of ${format(startOfWeek(currentDate), 'MMM d, yyyy')}`}
-                  {view === 'day' && format(currentDate, 'EEEE, MMMM d, yyyy')}
-                  {view === 'agenda' && 'Upcoming Agenda'}
-                </h2>
-                
-                <div className="flex items-center gap-1 bg-[#161616] border border-[#2D2D2D] rounded p-0.5">
+        <div className={localStyles.meetingsContainer}>
+          <div className={localStyles.meetingsLayout}>
+            {/* Left Block: The Main Calendar View */}
+            <div className={localStyles.mainCalendarBlock}>
+              
+              {/* suggestions banner */}
+              {suggestions.length > 0 && (
+                <div className="p-3 bg-[var(--purple)]/10 border border-[var(--purple)]/20 text-[var(--purple)] rounded-lg text-xs flex justify-between items-center select-none animate-pulse">
+                  <div className="flex items-center gap-2">
+                    <span>💡</span>
+                    <span>{suggestions[0].message}</span>
+                  </div>
                   <button
                     onClick={() => {
-                      if (view === 'month') setCurrentDate(subMonths(currentDate, 1));
-                      else setCurrentDate(addDays(currentDate, -7));
+                      setFormDefaultDate(new Date());
+                      setFormDefaultHour(10);
+                      setSelectedMeeting({
+                        title: `Recurring Sync w/ ${suggestions[0].attendeeName}`,
+                        attendees: [
+                          { name: suggestions[0].attendeeName, email: suggestions[0].attendeeEmail, role: 'REQUIRED' }
+                        ],
+                        recurrence: 'WEEKLY',
+                      });
+                      setIsFormOpen(true);
                     }}
-                    className="p-1 text-gray-400 hover:text-white hover:bg-white/5 rounded cursor-pointer text-xs"
+                    className="px-2.5 py-1 bg-[var(--purple)] text-[var(--text-inverse)] font-bold rounded text-[10px] hover:opacity-90 transition-colors cursor-pointer"
                   >
-                    ◀
+                    Create Series
                   </button>
-                  <button
-                    onClick={() => setCurrentDate(new Date())}
-                    className="px-2.5 py-0.5 text-[10px] text-gray-300 hover:text-white rounded hover:bg-white/5 cursor-pointer font-semibold uppercase"
-                  >
-                    Today
-                  </button>
+                </div>
+              )}
+
+              {/* Navigation and Date Display Controls Bar */}
+              <div className={localStyles.controlsBar}>
+                <div className={localStyles.controlsLeft}>
+                  <h2 className={localStyles.dateTitle}>
+                    {view === 'month' && format(currentDate, 'MMMM yyyy')}
+                    {view === 'week' && `Week of ${format(startOfWeek(currentDate), 'MMM d, yyyy')}`}
+                    {view === 'day' && format(currentDate, 'EEEE, MMMM d, yyyy')}
+                    {view === 'agenda' && 'Upcoming Agenda'}
+                  </h2>
+                  
+                  <div className={localStyles.navButtonGroup}>
+                    <button
+                      onClick={() => {
+                        if (view === 'month') setCurrentDate(subMonths(currentDate, 1));
+                        else setCurrentDate(addDays(currentDate, -7));
+                      }}
+                      className={localStyles.navButton}
+                    >
+                      ◀
+                    </button>
+                    <button
+                      onClick={() => setCurrentDate(new Date())}
+                      className={`${localStyles.navButton} ${localStyles.navButtonToday}`}
+                    >
+                      Today
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (view === 'month') setCurrentDate(addMonths(currentDate, 1));
+                        else setCurrentDate(addDays(currentDate, 7));
+                      }}
+                      className={localStyles.navButton}
+                    >
+                      ▶
+                    </button>
+                  </div>
+                </div>
+
+                <div className={localStyles.controlsRight}>
+                  <div className={localStyles.viewSelector}>
+                    <button onClick={() => setView('month')} className={`${localStyles.viewButton} ${view === 'month' ? localStyles.viewButtonActive : ''}`}>Month</button>
+                    <button onClick={() => setView('week')} className={`${localStyles.viewButton} ${view === 'week' ? localStyles.viewButtonActive : ''}`}>Week</button>
+                    <button onClick={() => setView('day')} className={`${localStyles.viewButton} ${view === 'day' ? localStyles.viewButtonActive : ''}`}>Day</button>
+                    <button onClick={() => setView('agenda')} className={`${localStyles.viewButton} ${view === 'agenda' ? localStyles.viewButtonActive : ''}`}>Agenda</button>
+                  </div>
+
                   <button
                     onClick={() => {
-                      if (view === 'month') setCurrentDate(addMonths(currentDate, 1));
-                      else setCurrentDate(addDays(currentDate, 7));
+                      setSelectedMeeting(null);
+                      setFormDefaultDate(undefined);
+                      setFormDefaultHour(undefined);
+                      setIsFormOpen(true);
                     }}
-                    className="p-1 text-gray-400 hover:text-white hover:bg-white/5 rounded cursor-pointer text-xs"
+                    className={localStyles.addMeetingButton}
                   >
-                    ▶
+                    <span>➕</span>
+                    <span>Add Meeting</span>
                   </button>
                 </div>
               </div>
 
-              <button
-                onClick={() => {
-                  setSelectedMeeting(null);
-                  setFormDefaultDate(undefined);
-                  setFormDefaultHour(undefined);
-                  setIsFormOpen(true);
-                }}
-                className="px-4 py-2 bg-[#8B7CF7] hover:bg-[#9c8ff8] text-[#0F0F0F] rounded-lg text-xs font-bold transition-all flex items-center gap-1 select-none cursor-pointer"
-              >
-                <span>➕</span>
-                <span>Add Meeting</span>
-              </button>
+              {/* Render selected view */}
+              {dataLoading ? (
+                <div className="h-[400px] bg-[var(--surface)] border border-[var(--border)] rounded-xl flex items-center justify-center text-[var(--text-secondary)] text-sm shadow-sm">
+                  <div className="w-6 h-6 border-2 border-[var(--border)] border-t-[var(--purple)] rounded-full animate-spin mr-2" />
+                  Loading calendar sync...
+                </div>
+              ) : (
+                <>
+                  {view === 'month' && (
+                    <CalendarGrid
+                      currentDate={currentDate}
+                      meetings={meetings}
+                      onSelectDay={(day) => {
+                        setFormDefaultDate(day);
+                        setFormDefaultHour(9);
+                        setSelectedMeeting(null);
+                        setIsFormOpen(true);
+                      }}
+                      onEditMeeting={(meeting) => {
+                        setSelectedMeeting(meeting);
+                        setIsFormOpen(true);
+                      }}
+                    />
+                  )}
+                  {view === 'week' && (
+                    <WeekView
+                      currentDate={currentDate}
+                      meetings={meetings}
+                      onSelectTimeSlot={(day, hour) => {
+                        setFormDefaultDate(day);
+                        setFormDefaultHour(hour);
+                        setSelectedMeeting(null);
+                        setIsFormOpen(true);
+                      }}
+                      onEditMeeting={(meeting) => {
+                        setSelectedMeeting(meeting);
+                        setIsFormOpen(true);
+                      }}
+                      onRescheduleMeeting={handleRescheduleMeeting}
+                    />
+                  )}
+                  {view === 'day' && (
+                    <DayView
+                      currentDate={currentDate}
+                      meetings={meetings}
+                      onEditMeeting={(meeting) => {
+                        setSelectedMeeting(meeting);
+                        setIsFormOpen(true);
+                      }}
+                      onAddNote={handleAddNote}
+                      onToggleActionItem={handleToggleActionItem}
+                      onCompleteMeeting={handleCompleteMeeting}
+                    />
+                  )}
+                  {view === 'agenda' && (
+                    <AgendaView
+                      meetings={meetings}
+                      onEditMeeting={(meeting) => {
+                        setSelectedMeeting(meeting);
+                        setIsFormOpen(true);
+                      }}
+                    />
+                  )}
+                </>
+              )}
             </div>
 
-            {/* Render selected view */}
-            {dataLoading ? (
-              <div className="h-[400px] bg-[#161616] border border-[#2D2D2D] rounded-xl flex items-center justify-center text-gray-400 text-sm">
-                <div className="w-6 h-6 border-2 border-purple-950 border-t-purple-400 rounded-full animate-spin mr-2" />
-                Loading calendar sync...
-              </div>
-            ) : (
-              <>
-                {view === 'month' && (
-                  <CalendarGrid
-                    currentDate={currentDate}
-                    meetings={meetings}
-                    onSelectDay={(day) => {
-                      setFormDefaultDate(day);
-                      setFormDefaultHour(9);
-                      setSelectedMeeting(null);
-                      setIsFormOpen(true);
-                    }}
-                    onEditMeeting={(meeting) => {
-                      setSelectedMeeting(meeting);
-                      setIsFormOpen(true);
-                    }}
-                  />
-                )}
-                {view === 'week' && (
-                  <WeekView
-                    currentDate={currentDate}
-                    meetings={meetings}
-                    onSelectTimeSlot={(day, hour) => {
-                      setFormDefaultDate(day);
-                      setFormDefaultHour(hour);
-                      setSelectedMeeting(null);
-                      setIsFormOpen(true);
-                    }}
-                    onEditMeeting={(meeting) => {
-                      setSelectedMeeting(meeting);
-                      setIsFormOpen(true);
-                    }}
-                    onRescheduleMeeting={handleRescheduleMeeting}
-                  />
-                )}
-                {view === 'day' && (
-                  <DayView
-                    currentDate={currentDate}
-                    meetings={meetings}
-                    onEditMeeting={(meeting) => {
-                      setSelectedMeeting(meeting);
-                      setIsFormOpen(true);
-                    }}
-                    onAddNote={handleAddNote}
-                    onToggleActionItem={handleToggleActionItem}
-                    onCompleteMeeting={handleCompleteMeeting}
-                  />
-                )}
-                {view === 'agenda' && (
-                  <AgendaView
-                    meetings={meetings}
-                    onEditMeeting={(meeting) => {
-                      setSelectedMeeting(meeting);
-                      setIsFormOpen(true);
-                    }}
-                  />
-                )}
-              </>
-            )}
-          </div>
+            {/* Right Block: Sidebar Widgets */}
+            <div className={localStyles.widgetsSidebar}>
+              {/* Focus time guard protection widget */}
+              <FocusTimeGuard
+                weeklyFocusScore={analytics?.focusScore ?? 100}
+              />
 
-          {/* Right Block: Sidebar Widgets */}
-          <div className="w-full xl:w-80 flex flex-col gap-6 flex-shrink-0">
-            {/* Focus time guard protection widget */}
-            <FocusTimeGuard
-              weeklyFocusScore={analytics?.focusScore ?? 100}
-            />
-
-            {/* Completed meeting Health scorecard */}
-            <div className="w-full bg-[#161616] border border-[#2D2D2D] rounded-xl p-4 flex flex-col gap-2 select-none">
-              <div className="flex justify-between items-center border-b border-[#2D2D2D] pb-2 mb-1">
-                <h4 className="text-xs font-bold text-gray-200 uppercase tracking-wider">
-                  💚 Meeting Health Score
-                </h4>
-                <span className="text-[10px] text-green-500 font-mono font-semibold">
-                  Weekly summary
-                </span>
-              </div>
-              <div className="flex items-center gap-4 mt-2">
-                <div className="w-14 h-14 rounded-full border-4 border-green-800 bg-green-950/20 text-green-400 font-bold flex items-center justify-center text-lg font-mono">
-                  {analytics?.avgHealthScore ?? 80}
-                </div>
-                <div className="flex-1 flex flex-col">
-                  <span className="text-xs text-gray-300">Your average this week</span>
-                  <span className="text-[10px] text-gray-500 mt-0.5 leading-relaxed">
-                    Efficiency is high! You finished several meetings early and avoided overlap penalties.
+              {/* Completed meeting Health scorecard */}
+              <div className={localStyles.widgetCard}>
+                <div className={localStyles.widgetHeader}>
+                  <h4 className={localStyles.widgetTitle}>
+                    💚 Meeting Health Score
+                  </h4>
+                  <span className={localStyles.widgetSubtitle}>
+                    Weekly summary
                   </span>
                 </div>
+                <div className={localStyles.widgetContent}>
+                  <MeetingHealthScore
+                    score={analytics?.avgHealthScore ?? 80}
+                    size="md"
+                  />
+                  <div className={localStyles.widgetInfoText}>
+                    <span className={localStyles.widgetLabel}>Your average this week</span>
+                    <span className={localStyles.widgetDesc}>
+                      Efficiency is high! You finished several meetings early and avoided overlap penalties.
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Overdue/Pending actions list widget */}
-            <ActionItemList
-              actionItems={actionItems}
-              onToggleActionItem={handleToggleActionItem}
-            />
+              {/* Overdue/Pending actions list widget */}
+              <ActionItemList
+                actionItems={actionItems}
+                onToggleActionItem={handleToggleActionItem}
+              />
+            </div>
           </div>
         </div>
       </main>
@@ -538,6 +659,24 @@ export default function MeetingsDashboardPage() {
         onSave={handleSaveMeeting}
         onDelete={handleDeleteMeeting}
       />
+
+      {/* Growl Toast Notifications */}
+      <div className={localStyles.toastContainer}>
+        {toasts.map(toast => (
+          <div key={toast.id} className={localStyles.toast}>
+            <div className={localStyles.toastHeader}>
+              <span className={localStyles.toastTitle}>{toast.title}</span>
+              <button 
+                onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))} 
+                className={localStyles.toastClose}
+              >
+                ✕
+              </button>
+            </div>
+            <p className={localStyles.toastMessage}>{toast.message}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

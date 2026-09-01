@@ -6,6 +6,7 @@ import FeaturesSection from '@/components/features/FeaturesSection';
 import HowItWorks from '@/components/features/HowItWorks';
 import Testimonials from '@/components/features/Testimonials';
 import PricingSection from '@/components/features/PricingSection';
+import BlogSection from '@/components/features/BlogSection';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <FeaturesSection />
         <HowItWorks />
         <Testimonials />
+        <BlogSection />
         <PricingSection />
       </main>
       <Footer />

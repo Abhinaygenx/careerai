@@ -20,9 +20,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Career.AI - Free ATS Score Checker & Resume Analyzer",
-  description: "Check your ATS score instantly with our free AI ATS score checker. Get hired faster with AI-powered resume optimization and intelligent match scoring.",
-  keywords: "ATS score checker, free ATS resume checker, resume score, AI resume analyzer, resume builder, ATS formatting",
+  title: "careerstart.in — Free ATS Score Checker & AI Career Tools",
+  description: "Check your ATS score instantly with our free ATS score checker. India's #1 AI career platform — resume builder, mock interviews, auto apply & more. Used by 50,000+ students.",
+  keywords: "ATS score checker, free ATS score checker, ATS resume checker India, resume score checker, AI resume builder, ATS score, how to improve ATS score, careerstart, career start, resume builder India, mock interview AI, auto apply jobs India",
+  metadataBase: new URL('https://careerstart.in'),
+  openGraph: {
+    title: 'careerstart.in — Free ATS Score Checker & AI Career Tools',
+    description: "India's #1 AI career platform. Free ATS score checker, AI resume builder, mock interviews & auto apply. Used by 50,000+ students.",
+    url: 'https://careerstart.in',
+    siteName: 'careerstart.in',
+    type: 'website',
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'careerstart.in — Free ATS Score Checker',
+    description: "Check your ATS score free. AI resume builder, mock interviews & auto apply. India's top career platform.",
+    site: '@careerstartIN',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+  alternates: {
+    canonical: 'https://careerstart.in',
+  },
 };
 
 import { AuthProvider } from "../context/AuthContext";

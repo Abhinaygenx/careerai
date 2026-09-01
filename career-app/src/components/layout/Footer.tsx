@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className={styles.ctaContent}>
                     <h2 className={styles.ctaTitle}>Ready to Land Your Dream Job?</h2>
                     <p className={styles.ctaSubtitle}>
-                        Join 50,000+ students who are getting hired faster with Career.ai
+                        Join 50,000+ students who are getting hired faster with careerstart.in
                     </p>
                     <div className={styles.ctaActions}>
                         <Link href="/signup" className={styles.ctaButton}>
@@ -29,8 +29,7 @@ export default function Footer() {
                         {/* Brand Column */}
                         <div className={styles.brand}>
                             <Link href="/" className={styles.logo}>
-                                <span className={styles.logoIcon}>🎯</span>
-                                <span className={styles.logoText}>Career<span className={styles.logoAi}>.ai</span></span>
+                                <span className={styles.logoText}>careerstart<span className={styles.logoAi}>.in</span></span>
                             </Link>
                             <p className={styles.brandDesc}>
                                 India&apos;s #1 AI-powered hiring platform. Get hired faster with intelligent resume optimization and career tools.
@@ -75,11 +74,11 @@ export default function Footer() {
                         <div className={styles.column}>
                             <h3 className={styles.columnTitle}>Resources</h3>
                             <ul className={styles.columnLinks}>
-                                <li><Link href="/blog">Blog</Link></li>
-                                <li><Link href="/guides">Career Guides</Link></li>
-                                <li><Link href="/resume-examples">Resume Examples</Link></li>
-                                <li><Link href="/interview-tips">Interview Tips</Link></li>
-                                <li><Link href="/salary-guide">Salary Guide</Link></li>
+                                <li><Link href="/blog">Career Blog</Link></li>
+                                <li><Link href="/resources">All Resources</Link></li>
+                                <li><Link href="/blog/what-is-ats-score">ATS Score Guide</Link></li>
+                                <li><Link href="/blog/how-to-beat-ats">Resume Tips</Link></li>
+                                <li><Link href="/blog/mock-interview-tips">Interview Prep</Link></li>
                             </ul>
                         </div>
 
@@ -112,7 +111,7 @@ export default function Footer() {
             <div className={styles.bottom}>
                 <div className={styles.container}>
                     <p className={styles.copyright}>
-                        © 2024 Career.ai. All rights reserved. Made with ❤️ in India
+                        © 2024 careerstart.in. All rights reserved. Made with ❤️ in India
                     </p>
                 </div>
             </div>

@@ -350,7 +350,7 @@ export default function ContactPage() {
                                                     id="suggestion"
                                                     value={suggestionData.suggestion}
                                                     onChange={(e) => setSuggestionData({ ...suggestionData, suggestion: e.target.value })}
-                                                    placeholder="Tell us what would make Career.ai even better for you. Be as detailed as you'd like!"
+                                                    placeholder="Tell us what would make careerstart.in even better for you. Be as detailed as you'd like!"
                                                     rows={6}
                                                     required
                                                 />
@@ -377,7 +377,7 @@ export default function ContactPage() {
                                     {activeTab === 'feedback' && (
                                         <form onSubmit={handleFeedbackSubmit} className={styles.form}>
                                             <div className={styles.suggestionIntro}>
-                                                <p>🗣️ We value your insights! Tell us about your experience using Career.ai.</p>
+                                                <p>🗣️ We value your insights! Tell us about your experience using careerstart.in.</p>
                                             </div>
 
                                             <div className={styles.formGroup}>

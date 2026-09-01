@@ -2,11 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { BarChart3, FileText, Zap, Mic2, Mail } from 'lucide-react';
 import styles from './FeaturesSection.module.css';
 
 const mainFeatures = [
     {
-        icon: '📊',
+        icon: BarChart3,
         iconBg: 'purple',
         badge: 'FREE',
         title: 'ATS Score Checker',
@@ -22,7 +23,7 @@ const mainFeatures = [
         highlight: true
     },
     {
-        icon: '📝',
+        icon: FileText,
         iconBg: 'green',
         badge: 'CORE',
         title: 'AI Resume Builder',
@@ -41,21 +42,21 @@ const mainFeatures = [
 
 const secondaryFeatures = [
     {
-        icon: '🚀',
+        icon: Zap,
         iconBg: 'orange',
         title: 'AI Auto Apply',
         description: 'Smart job application automation with deadline tracking and best-match resume selection.',
         href: '/auto-apply'
     },
     {
-        icon: '🎤',
+        icon: Mic2,
         iconBg: 'purple',
         title: 'AI Mock Interviews',
         description: 'Practice with our AI interviewer. Get feedback on your answers and improve.',
         href: '/mock-interview'
     },
     {
-        icon: '✉️',
+        icon: Mail,
         iconBg: 'green',
         title: 'AI Cover Letters',
         description: 'Generate personalized cover letters tailored to each job description.',
@@ -92,7 +93,7 @@ export default function FeaturesSection() {
                 {/* Section Header */}
                 <div className={styles.header}>
                     <span className={styles.badge}>
-                        <span>⚡</span> AI-Powered Tools
+                        <Zap size={13} strokeWidth={2.5} /> AI-Powered Tools
                     </span>
                     <h2 ref={headingRef} className={styles.title}>
                         {HEADING_TEXT.split(' ').map((word, i) => (
@@ -120,7 +121,7 @@ export default function FeaturesSection() {
                         >
                             <div className={styles.cardHeader}>
                                 <div className={`${styles.icon} ${styles[feature.iconBg]}`}>
-                                    {feature.icon}
+                                    <feature.icon size={22} strokeWidth={1.75} />
                                 </div>
                                 <span className={`${styles.cardBadge} ${feature.badge === 'FREE' ? styles.free : ''}`}>
                                     {feature.badge}
@@ -156,7 +157,7 @@ export default function FeaturesSection() {
                     {secondaryFeatures.map((feature, index) => (
                         <Link key={index} href={feature.href} className={styles.secondaryCard}>
                             <div className={`${styles.icon} ${styles[feature.iconBg]}`}>
-                                {feature.icon}
+                                <feature.icon size={20} strokeWidth={1.75} />
                             </div>
                             <div className={styles.secondaryContent}>
                                 <h4 className={styles.secondaryTitle}>{feature.title}</h4>

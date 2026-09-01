@@ -4,6 +4,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
+import {
+    BarChart3, FileText, Mail, Mic2, Zap,
+    LayoutDashboard, User, LogOut,
+    Moon, Sun,
+    CalendarDays, Sparkles, GraduationCap, BookOpen
+} from 'lucide-react';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -34,8 +40,7 @@ export default function Header() {
             <header className={styles.header}>
                 <div className={styles.container}>
                     <Link href="/" className={styles.logo}>
-                        <span className={styles.logoIcon}>🎯</span>
-                        <span className={styles.logoText}>Career<span className={styles.logoAi}>.ai</span></span>
+                        <span className={styles.logoText}>careerstart<span className={styles.logoAi}>.in</span></span>
                     </Link>
 
                     <nav className={styles.nav}>
@@ -49,35 +54,35 @@ export default function Header() {
                                 </button>
                                 <div className={styles.dropdownMenu}>
                                     <Link href="/ats-checker" className={styles.dropdownItem}>
-                                        <span className={styles.dropdownIcon}>📊</span>
+                                        <span className={styles.dropdownIcon}><BarChart3 size={18} strokeWidth={1.75} /></span>
                                         <div>
                                             <span className={styles.dropdownTitle}>ATS Score Checker</span>
                                             <span className={styles.dropdownDesc}>Get your resume score in 60 seconds</span>
                                         </div>
                                     </Link>
                                     <Link href="/resume-builder" className={styles.dropdownItem}>
-                                        <span className={styles.dropdownIcon}>📝</span>
+                                        <span className={styles.dropdownIcon}><FileText size={18} strokeWidth={1.75} /></span>
                                         <div>
                                             <span className={styles.dropdownTitle}>AI Resume Builder</span>
                                             <span className={styles.dropdownDesc}>Create ATS-optimized resumes</span>
                                         </div>
                                     </Link>
                                     <Link href="/cover-letter" className={styles.dropdownItem}>
-                                        <span className={styles.dropdownIcon}>✉️</span>
+                                        <span className={styles.dropdownIcon}><Mail size={18} strokeWidth={1.75} /></span>
                                         <div>
                                             <span className={styles.dropdownTitle}>AI Cover Letters</span>
                                             <span className={styles.dropdownDesc}>Generate personalized cover letters</span>
                                         </div>
                                     </Link>
                                     <Link href="/mock-interview" className={styles.dropdownItem}>
-                                        <span className={styles.dropdownIcon}>🎤</span>
+                                        <span className={styles.dropdownIcon}><Mic2 size={18} strokeWidth={1.75} /></span>
                                         <div>
                                             <span className={styles.dropdownTitle}>AI Mock Interviews</span>
                                             <span className={styles.dropdownDesc}>Practice with AI interviewer</span>
                                         </div>
                                     </Link>
                                     <Link href="/auto-apply" className={styles.dropdownItem}>
-                                        <span className={styles.dropdownIcon}>🚀</span>
+                                        <span className={styles.dropdownIcon}><Zap size={18} strokeWidth={1.75} /></span>
                                         <div>
                                             <span className={styles.dropdownTitle}>AI Auto Apply</span>
                                             <span className={styles.dropdownDesc}>Automate job applications</span>
@@ -85,7 +90,9 @@ export default function Header() {
                                     </Link>
                                 </div>
                             </div>
-                            <Link href="/internships/calendar" className={styles.navLink}>Internship Calendar</Link>
+                            <Link href="/internships/calendar" className={styles.navLinkHighlight}>
+                                Internship Calendar
+                            </Link>
                             <Link href="/pricing" className={styles.navLink}>Pricing</Link>
                             <Link href="/colleges" className={styles.navLink}>My Colleges</Link>
                             <Link href="/resources" className={styles.navLink}>Resources</Link>
@@ -101,7 +108,7 @@ export default function Header() {
                                 aria-label="Toggle theme"
                                 title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
                             >
-                                {isDark ? '☀️' : '🌙'}
+                                {isDark ? <Sun size={17} strokeWidth={1.75} /> : <Moon size={17} strokeWidth={1.75} />}
                             </button>
                         )}
 
@@ -117,14 +124,14 @@ export default function Header() {
                                 </button>
                                 <div className={styles.userMenuDropdown}>
                                     <Link href="/dashboard" className={styles.userMenuItem}>
-                                        <span>📊</span> Dashboard
+                                        <span><LayoutDashboard size={15} strokeWidth={1.75} /></span> Dashboard
                                     </Link>
                                     <Link href="/profile" className={styles.userMenuItem}>
-                                        <span>👤</span> Profile
+                                        <span><User size={15} strokeWidth={1.75} /></span> Profile
                                     </Link>
                                     <div style={{ height: '1px', background: 'var(--border-light)', margin: '4px 0' }}></div>
                                     <button onClick={handleLogout} className={`${styles.userMenuItem} ${styles.logout}`}>
-                                        <span>🚪</span> Sign Out
+                                        <span><LogOut size={15} strokeWidth={1.75} /></span> Sign Out
                                     </button>
                                 </div>
                             </div>
@@ -155,33 +162,33 @@ export default function Header() {
                 <div className={styles.mobileMenuInner}>
                     <nav className={styles.mobileNav}>
                         <Link href="/ats-checker" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>📊</span> ATS Score Checker
+                            <span><BarChart3 size={17} strokeWidth={1.75} /></span> ATS Score Checker
                         </Link>
                         <Link href="/resume-builder" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>📝</span> AI Resume Builder
+                            <span><FileText size={17} strokeWidth={1.75} /></span> AI Resume Builder
                         </Link>
                         <Link href="/cover-letter" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>✉️</span> AI Cover Letters
+                            <span><Mail size={17} strokeWidth={1.75} /></span> AI Cover Letters
                         </Link>
                         <Link href="/mock-interview" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>🎤</span> AI Mock Interviews
+                            <span><Mic2 size={17} strokeWidth={1.75} /></span> AI Mock Interviews
                         </Link>
                         <Link href="/auto-apply" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>🚀</span> AI Auto Apply
+                            <span><Zap size={17} strokeWidth={1.75} /></span> AI Auto Apply
                         </Link>
                         <div className={styles.mobileDivider} />
                         <Link href="/internships/calendar" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>📅</span> Internship Calendar
+                            <span><CalendarDays size={17} strokeWidth={1.75} /></span> Internship Calendar
                         </Link>
                         <div className={styles.mobileDivider} />
                         <Link href="/pricing" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>💎</span> Pricing
+                            <span><Sparkles size={17} strokeWidth={1.75} /></span> Pricing
                         </Link>
                         <Link href="/colleges" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>🎓</span> My Colleges
+                            <span><GraduationCap size={17} strokeWidth={1.75} /></span> My Colleges
                         </Link>
                         <Link href="/resources" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-                            <span>📚</span> Resources
+                            <span><BookOpen size={17} strokeWidth={1.75} /></span> Resources
                         </Link>
                     </nav>
 
@@ -190,9 +197,9 @@ export default function Header() {
                             <button
                                 onClick={() => { toggleTheme(); }}
                                 className={styles.mobileSignIn}
-                                style={{ fontFamily: 'inherit' }}
+                                style={{ fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}
                             >
-                                {isDark ? '☀️ Switch to Light Mode' : '🌙 Switch to Dark Mode'}
+                                {isDark ? <><Sun size={15} strokeWidth={1.75} /> Switch to Light Mode</> : <><Moon size={15} strokeWidth={1.75} /> Switch to Dark Mode</>}
                             </button>
                         )}
                         {showAuth ? (

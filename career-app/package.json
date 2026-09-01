@@ -19,6 +19,7 @@
     "framer-motion": "^12.40.0",
     "googleapis": "^172.0.0",
     "ics": "^3.12.0",
+    "lucide-react": "^1.25.0",
     "mammoth": "^1.11.0",
     "next": "16.1.4",
     "nodemailer": "^7.0.12",

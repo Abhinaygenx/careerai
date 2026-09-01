@@ -88,7 +88,7 @@ export default function LoginPage() {
                     </div>
 
                     <div className={styles.leftFooter}>
-                        <p>© 2026 Career.ai. All rights reserved.</p>
+                        <p>© 2026 careerstart.in. All rights reserved.</p>
                     </div>
                 </div>
 

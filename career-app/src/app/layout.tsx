@@ -19,15 +19,17 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+
 export const metadata: Metadata = {
   title: "careerstart.in — Free ATS Score Checker & AI Career Tools",
   description: "Check your ATS score instantly with our free ATS score checker. India's #1 AI career platform — resume builder, mock interviews, auto apply & more. Used by 50,000+ students.",
   keywords: "ATS score checker, free ATS score checker, ATS resume checker India, resume score checker, AI resume builder, ATS score, how to improve ATS score, careerstart, career start, resume builder India, mock interview AI, auto apply jobs India",
-  metadataBase: new URL('https://careerstart.in'),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: 'careerstart.in — Free ATS Score Checker & AI Career Tools',
     description: "India's #1 AI career platform. Free ATS score checker, AI resume builder, mock interviews & auto apply. Used by 50,000+ students.",
-    url: 'https://careerstart.in',
+    url: siteUrl,
     siteName: 'careerstart.in',
     type: 'website',
     locale: 'en_IN',
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   alternates: {
-    canonical: 'https://careerstart.in',
+    canonical: siteUrl,
   },
 };
 

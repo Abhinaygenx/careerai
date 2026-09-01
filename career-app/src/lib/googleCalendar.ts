@@ -56,7 +56,7 @@ export async function addInternshipToCalendar(internship: any, accessToken: stri
 
   const event = {
     summary: `⚠️ Deadline: ${internship.title} - ${internship.company}`,
-    description: `Apply here: ${internship.applyUrl}\n\nStipend: ${internship.stipend}\nDuration: ${internship.duration}\n\nAdded via Career.AI Internship Calendar`,
+    description: `Apply here: ${internship.applyUrl}\n\nStipend: ${internship.stipend}\nDuration: ${internship.duration}\n\nAdded via careerstart.in Internship Calendar`,
     start: {
       date: startStr,
     },

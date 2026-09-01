@@ -93,23 +93,23 @@
 .logo {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 0;
     text-decoration: none;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
+    letter-spacing: -0.04em;
     margin-bottom: 16px;
-}
-
-.logoIcon {
-    font-size: 28px;
 }
 
 .logoText {
     color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.04em;
 }
 
 .logoAi {
-    color: var(--text-secondary);
+    color: var(--accent);
+    font-weight: 700;
 }
 
 .brandDesc {

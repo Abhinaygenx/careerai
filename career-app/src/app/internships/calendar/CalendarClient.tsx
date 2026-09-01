@@ -566,7 +566,7 @@ export default function CalendarClient({ initialInternships, initialMonth, isInd
           <div className={styles.statCard}>
             <span className={styles.statLabel}>Added to Calendar</span>
             <p className={styles.statValue} style={{ color: 'var(--purple)' }}>{metrics.syncedCount}</p>
-            <span className={styles.statSubtext}>Via Career.AI</span>
+            <span className={styles.statSubtext}>Via careerstart.in</span>
             <span className={styles.statIndicator} style={{ backgroundColor: 'var(--purple)' }}></span>
           </div>
         </div>

@@ -9,6 +9,8 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
@@ -24,12 +26,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `https://careerstart.in/blog/${post.slug}`,
+      url: `${siteUrl}/blog/${post.slug}`,
       siteName: 'careerstart.in',
       type: 'article',
       publishedTime: post.publishedAt,
     },
-    alternates: { canonical: `https://careerstart.in/blog/${post.slug}` },
+    alternates: { canonical: `${siteUrl}/blog/${post.slug}` },
   };
 }
 
@@ -54,8 +56,8 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.description,
     datePublished: post.publishedAt,
     author: { '@type': 'Organization', name: 'careerstart.in' },
-    publisher: { '@type': 'Organization', name: 'careerstart.in', url: 'https://careerstart.in' },
-    url: `https://careerstart.in/blog/${post.slug}`,
+    publisher: { '@type': 'Organization', name: 'careerstart.in', url: siteUrl },
+    url: `${siteUrl}/blog/${post.slug}`,
     keywords: post.keywords.join(', '),
   };
 

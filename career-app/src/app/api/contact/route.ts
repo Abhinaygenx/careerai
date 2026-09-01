@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
             };
 
             emailContent = {
-                subject: `[Career.AI Contact] ${subjectLabels[subject] || 'New Message'} from ${name}`,
+                subject: `[careerstart.in Contact] ${subjectLabels[subject] || 'New Message'} from ${name}`,
                 html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                         <div style="background: linear-gradient(135deg, #8b5cf6, #ec4899); padding: 20px; border-radius: 10px 10px 0 0;">
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
                             </div>
                             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; text-align: center;">
                                 <p style="color: #71717a; font-size: 12px; margin: 0;">
-                                    Sent from Career.AI Contact Page<br>
+                                    Sent from careerstart.in Contact Page<br>
                                     ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
                                 </p>
                             </div>
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
             const priorityInfo = priorityLabels[priority] || priorityLabels.medium;
 
             emailContent = {
-                subject: `[Career.AI Suggestion] ${priorityInfo.text} - ${categoryLabels[category] || category}`,
+                subject: `[careerstart.in Suggestion] ${priorityInfo.text} - ${categoryLabels[category] || category}`,
                 html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                         <div style="background: linear-gradient(135deg, #8b5cf6, #ec4899); padding: 20px; border-radius: 10px 10px 0 0;">
@@ -140,7 +140,7 @@ export async function POST(request: NextRequest) {
                             </div>
                             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; text-align: center;">
                                 <p style="color: #71717a; font-size: 12px; margin: 0;">
-                                    Sent from Career.AI Suggestion Form<br>
+                                    Sent from careerstart.in Suggestion Form<br>
                                     ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
                                 </p>
                             </div>
@@ -160,7 +160,7 @@ export async function POST(request: NextRequest) {
             }
 
             emailContent = {
-                subject: `[Career.AI Feedback] ${rating} Star Rating from ${name || 'Anonymous'}`,
+                subject: `[careerstart.in Feedback] ${rating} Star Rating from ${name || 'Anonymous'}`,
                 html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                         <div style="background: linear-gradient(135deg, #8b5cf6, #ec4899); padding: 20px; border-radius: 10px 10px 0 0;">
@@ -193,7 +193,7 @@ export async function POST(request: NextRequest) {
                             </div>
                             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; text-align: center;">
                                 <p style="color: #71717a; font-size: 12px; margin: 0;">
-                                    Sent from Career.AI Feedback Form<br>
+                                    Sent from careerstart.in Feedback Form<br>
                                     ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
                                 </p>
                             </div>
@@ -210,7 +210,7 @@ export async function POST(request: NextRequest) {
 
         // Send email
         await transporter.sendMail({
-            from: `"Career.AI" <${process.env.EMAIL_USER}>`,
+            from: `"careerstart.in" <${process.env.EMAIL_USER}>`,
             to: 'abhinaykumar5432@gmail.com',
             ...emailContent,
         });

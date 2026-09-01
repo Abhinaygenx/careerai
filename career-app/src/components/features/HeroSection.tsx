@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BarChart3, CheckCircle } from 'lucide-react';
 import styles from './HeroSection.module.css';
 import confetti from 'canvas-confetti';
 
@@ -77,9 +78,9 @@ export default function HeroSection() {
                     {/* Trust Badge */}
                     <div className={`${styles.trust} ${styles.animateFadeUp}`} style={{ animationDelay: '0.7s' }}>
                         <div className={styles.avatars}>
-                            <div className={styles.avatar}>👨‍💼</div>
-                            <div className={styles.avatar}>👩‍💻</div>
-                            <div className={styles.avatar}>👨‍🎓</div>
+                            <div className={styles.avatar} style={{ background: '#7C3AED', color: '#fff' }}>A</div>
+                            <div className={styles.avatar} style={{ background: '#0EA5E9', color: '#fff' }}>R</div>
+                            <div className={styles.avatar} style={{ background: '#C4F82A', color: '#0F0F0F' }}>S</div>
                         </div>
                         <span className={styles.trustText}>
                             <strong>50,000+</strong> students across India trust us
@@ -168,13 +169,13 @@ export default function HeroSection() {
 
                     {/* Floating Badge 1 */}
                     <div className={styles.floatingCard1}>
-                        <span className={styles.floatingIcon}>📊</span>
+                        <span className={styles.floatingIcon}><BarChart3 size={16} strokeWidth={1.75} /></span>
                         <span>ATS Optimized</span>
                     </div>
 
                     {/* Floating Badge 2 */}
                     <div className={styles.floatingCard2}>
-                        <span className={styles.floatingIcon}>✓</span>
+                        <span className={styles.floatingIcon}><CheckCircle size={16} strokeWidth={1.75} /></span>
                         <span>85% Match Rate</span>
                     </div>
                 </div>

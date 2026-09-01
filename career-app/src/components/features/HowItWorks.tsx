@@ -1,27 +1,28 @@
+import { Upload, BrainCircuit, Wand2, Target } from 'lucide-react';
 import styles from './HowItWorks.module.css';
 
 const steps = [
     {
         number: 1,
-        icon: '📄',
+        icon: Upload,
         title: 'Upload Resume',
         description: 'Simply upload your resume or paste your LinkedIn profile URL. We support PDF, DOCX formats.'
     },
     {
         number: 2,
-        icon: '🤖',
+        icon: BrainCircuit,
         title: 'Get AI Analysis',
         description: 'Our AI analyzes your profile and suggests improvements based on thousands of successful resumes.'
     },
     {
         number: 3,
-        icon: '✨',
+        icon: Wand2,
         title: 'Apply Suggestions',
         description: 'Make improvements with one-click fixes. Our AI rewrites sections to boost your ATS score.'
     },
     {
         number: 4,
-        icon: '🎯',
+        icon: Target,
         title: 'Get Hired',
         description: 'Apply to jobs with confidence. Track applications and get interview prep assistance.'
     }
@@ -32,7 +33,7 @@ export default function HowItWorks() {
         <section className={styles.section}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <h2 className={styles.title}>How Career.ai Works</h2>
+                    <h2 className={styles.title}>How careerstart.in Works</h2>
                     <p className={styles.subtitle}>
                         Get hired in 4 simple steps. No complexity, just results.
                     </p>
@@ -42,7 +43,7 @@ export default function HowItWorks() {
                     {steps.map((step, index) => (
                         <div key={index} className={styles.step}>
                             <div className={styles.stepNumber}>{step.number}</div>
-                            <div className={styles.stepIcon}>{step.icon}</div>
+                            <div className={styles.stepIcon}><step.icon size={24} strokeWidth={1.75} /></div>
                             <h3 className={styles.stepTitle}>{step.title}</h3>
                             <p className={styles.stepDesc}>{step.description}</p>
                             {index < steps.length - 1 && (

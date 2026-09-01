@@ -4,18 +4,20 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { blogPosts } from './blogData';
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+
 export const metadata: Metadata = {
-  title: 'Career Blog -- ATS Tips, Resume Guides and Interview Advice | careerstart.in',
+  title: 'Career Blog — ATS Tips, Resume Guides & Interview Advice | careerstart.in',
   description: "Free career guides, ATS score tips, resume writing advice, and interview preparation articles. India's best career resource for job seekers and freshers.",
   keywords: 'ATS score checker tips, resume tips India, career advice freshers, interview preparation, AI resume builder guide, how to beat ATS',
   openGraph: {
     title: 'Career Blog | careerstart.in',
     description: "Free career guides, ATS tips, and resume advice from India's #1 career platform.",
-    url: 'https://careerstart.in/blog',
+    url: `${siteUrl}/blog`,
     siteName: 'careerstart.in',
     type: 'website',
   },
-  alternates: { canonical: 'https://careerstart.in/blog' },
+  alternates: { canonical: `${siteUrl}/blog` },
 };
 
 const categoryColors: Record<string, string> = {

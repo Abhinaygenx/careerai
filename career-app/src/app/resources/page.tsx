@@ -3,20 +3,22 @@ import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+
 export const metadata: Metadata = {
-  title: 'Career Resources -- Free Guides, Tools and Templates | careerstart.in',
+  title: 'Career Resources — Free Guides, Tools & Templates | careerstart.in',
   description:
-    'Free career resources for Indian job seekers. ATS optimization guides, resume templates, interview prep, salary guides, and career tips -- all in one place.',
+    'Free career resources for Indian job seekers. ATS optimization guides, resume templates, interview prep, salary guides, and career tips — all in one place.',
   keywords:
     'career resources India, free resume guide, ATS resume tips, interview preparation guide, career advice freshers, resume templates India',
   openGraph: {
     title: 'Free Career Resources | careerstart.in',
     description: 'Free guides, tools, and templates for job seekers in India.',
-    url: 'https://careerstart.in/resources',
+    url: `${siteUrl}/resources`,
     siteName: 'careerstart.in',
     type: 'website',
   },
-  alternates: { canonical: 'https://careerstart.in/resources' },
+  alternates: { canonical: `${siteUrl}/resources` },
 };
 
 const tools = [

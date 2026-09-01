@@ -41,8 +41,7 @@ export default function ProfilePage() {
                     <span>←</span> Back to Dashboard
                 </Link>
                 <div className={styles.logo}>
-                    <span>🎯</span>
-                    <span>Career.ai</span>
+                    <span>careerstart.in</span>
                 </div>
             </header>
 

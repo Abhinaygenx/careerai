@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
+import { getSiteUrl } from '@/lib/siteConfig';
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: 'AI Resume Builder — ATS-Optimized Resumes | careerstart.in',

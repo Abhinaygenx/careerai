@@ -4,12 +4,13 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { blogPosts, getBlogPost, getRelatedPosts } from '../blogData';
+import { getSiteUrl } from '@/lib/siteConfig';
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+const siteUrl = getSiteUrl();
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));

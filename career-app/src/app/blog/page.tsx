@@ -3,8 +3,9 @@ import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { blogPosts } from './blogData';
+import { getSiteUrl } from '@/lib/siteConfig';
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: 'Career Blog — ATS Tips, Resume Guides & Interview Advice | careerstart.in',

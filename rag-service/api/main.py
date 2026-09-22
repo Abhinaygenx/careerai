@@ -40,7 +40,6 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "https://careerstart.in",
         "https://www.careerstart.in",
-        "https://career.ai",
         "https://*.vercel.app",
     ],
     allow_credentials=True,

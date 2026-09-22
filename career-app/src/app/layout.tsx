@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { getSiteUrl } from "@/lib/siteConfig";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "careerstart.in — Free ATS Score Checker & AI Career Tools",
@@ -52,6 +53,7 @@ export const metadata: Metadata = {
 
 import { AuthProvider } from "../context/AuthContext";
 import { ThemeProvider } from "../context/ThemeContext";
+import InternshipCalendarPopup from "@/components/features/InternshipCalendarPopup";
 
 export default function RootLayout({
   children,
@@ -64,6 +66,7 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             {children}
+            <InternshipCalendarPopup />
           </AuthProvider>
         </ThemeProvider>
       </body>

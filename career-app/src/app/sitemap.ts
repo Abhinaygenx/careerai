@@ -1,12 +1,13 @@
 import { MetadataRoute } from 'next';
 import { blogPosts } from './blog/blogData';
+import { getSiteUrl } from '@/lib/siteConfig';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://careerstart.in').replace(/\/+$/, '');
+  const baseUrl = getSiteUrl();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}`,
+      url: `${baseUrl}/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
@@ -40,6 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/internships/calendar`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/blog`,

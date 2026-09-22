@@ -18,7 +18,7 @@ const COLORS = [
 ];
 
 const ATTENDEE_TEMPLATES = [
-  { name: 'John Doe', email: 'john@career.ai', role: 'REQUIRED' },
+  { name: 'John Doe', email: 'john@careerstart.in', role: 'REQUIRED' },
   { name: 'Sarah Connor', email: 'sarah@skynet.com', role: 'REQUIRED' },
   { name: 'Alice Vance', email: 'alice@blackmesa.org', role: 'OPTIONAL' },
   { name: 'Bob Vance', email: 'bob@vancerefrigeration.com', role: 'OPTIONAL' },
@@ -124,7 +124,7 @@ async function seed() {
 
     // Attendees
     const attendees = [
-      { name: 'Admin User', email: 'admin@career.ai', role: 'HOST', rsvp: 'ACCEPTED' },
+      { name: 'Admin User', email: 'admin@careerstart.in', role: 'HOST', rsvp: 'ACCEPTED' },
     ];
     // Add 1 to 3 extra guests
     const guestCount = 1 + (i % 3);

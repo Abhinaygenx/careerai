@@ -9,6 +9,8 @@ export interface Internship {
   stipend: string;
   duration: string;
   applyUrl: string;
+  location?: string;
+  workMode?: 'Remote' | 'Full-Time' | 'In-Office' | 'Hybrid';
 }
 
 export const mockInternships: Omit<Internship, 'deadline'>[] = [
@@ -423,7 +425,13 @@ function getCategory(item: any): 'Tech' | 'Finance' | 'Design' | 'Marketing' {
   return 'Tech';
 }
 
-function getDeterministicValues(id: string, isIndiaMode: boolean = false): { day: number; stipend: string; duration: string } {
+function getDeterministicValues(id: string, isIndiaMode: boolean = false): { 
+  day: number; 
+  stipend: string; 
+  duration: string;
+  workMode: 'Remote' | 'Full-Time' | 'In-Office' | 'Hybrid';
+  location: string;
+} {
   let hash = 0;
   for (let i = 0; i < id.length; i++) {
     hash = (hash << 5) - hash + id.charCodeAt(i);
@@ -443,7 +451,40 @@ function getDeterministicValues(id: string, isIndiaMode: boolean = false): { day
 
   const durations = ['2 Months', '3 Months', '4 Months', '6 Months'];
   const duration = durations[absHash % durations.length];
-  return { day, stipend, duration };
+
+  const modes: ('Remote' | 'Full-Time' | 'In-Office' | 'Hybrid')[] = ['Remote', 'Full-Time', 'In-Office', 'Hybrid'];
+  const workMode = modes[absHash % modes.length];
+
+  let location = 'Remote';
+  if (workMode === 'Remote') {
+    location = isIndiaMode ? 'Remote (India)' : 'Remote (Global)';
+  } else if (isIndiaMode) {
+    const indiaCities = [
+      'Bengaluru, KA',
+      'Hyderabad, TS',
+      'Mumbai, MH',
+      'Pune, MH',
+      'Gurugram, HR',
+      'Noida, UP',
+      'Delhi, NCR',
+      'Chennai, TN'
+    ];
+    location = indiaCities[absHash % indiaCities.length];
+  } else {
+    const globalCities = [
+      'San Francisco, CA',
+      'New York, NY',
+      'Seattle, WA',
+      'Austin, TX',
+      'Boston, MA',
+      'London, UK',
+      'Toronto, ON',
+      'Chicago, IL'
+    ];
+    location = globalCities[absHash % globalCities.length];
+  }
+
+  return { day, stipend, duration, workMode, location };
 }
 
 async function fetchAndParseMD(url: string): Promise<any[]> {
@@ -719,6 +760,30 @@ export async function getInternshipsForMonth(monthParam?: string | null, isIndia
         const duration = item.duration || det.duration;
         const deadline = new Date(targetYear, targetMonth - 1, det.day);
         
+        const rawLoc = item.location && typeof item.location === 'string' && item.location.trim().length > 0
+          ? item.location.trim()
+          : det.location;
+
+        const locLower = rawLoc.toLowerCase();
+        const titleLower = title.toLowerCase();
+
+        let workMode = item.workMode;
+        if (!workMode) {
+          if (locLower.includes('remote') || titleLower.includes('remote') || locLower.includes('anywhere')) {
+            workMode = 'Remote';
+          } else if (titleLower.includes('full-time') || titleLower.includes('full time')) {
+            workMode = 'Full-Time';
+          } else if (locLower.includes('hybrid') || titleLower.includes('hybrid')) {
+            workMode = 'Hybrid';
+          } else {
+            workMode = det.workMode;
+          }
+        }
+
+        const location = workMode === 'Remote' && !locLower.includes('remote')
+          ? (isIndiaMode ? 'Remote (India)' : 'Remote (Global)')
+          : rawLoc;
+        
         return {
           id,
           title,
@@ -727,7 +792,9 @@ export async function getInternshipsForMonth(monthParam?: string | null, isIndia
           type,
           stipend,
           duration,
-          applyUrl
+          applyUrl,
+          location,
+          workMode
         };
       });
     }
@@ -743,7 +810,9 @@ export async function getInternshipsForMonth(monthParam?: string | null, isIndia
       const deadline = new Date(targetYear, targetMonth - 1, det.day);
       return {
         ...mock,
-        deadline: deadline.toISOString()
+        deadline: deadline.toISOString(),
+        location: (mock as any).location || det.location,
+        workMode: (mock as any).workMode || det.workMode
       };
     });
   }
